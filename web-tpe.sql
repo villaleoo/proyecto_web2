@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-09-2023 a las 00:56:24
+-- Tiempo de generación: 26-09-2023 a las 01:38:25
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.0.28
 
@@ -50,13 +50,6 @@ CREATE TABLE `liga` (
   `cant_partidos` int(11) NOT NULL,
   `division` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `liga`
---
-
-INSERT INTO `liga` (`id_liga`, `nombre`, `pais`, `formato`, `reglas`, `cant_partidos`, `division`) VALUES
-(1, '', '', '0', '', 0, 0);
 
 -- --------------------------------------------------------
 
