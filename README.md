@@ -2,7 +2,7 @@
 
 ## Integrantes:
 - Leopoldo Villa. villaleoo@hotmail.com .
-- Gabriel Andres Garcia. 
+- Gabriel Andres Garcia. gabrielandgarcia.995@gmail.com
 
 ## Tematica:
 Sitio web con visualizacion de posiciones y resultados de futbol (similar www.promiedos.com.ar). La idea
