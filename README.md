@@ -1,8 +1,8 @@
 # TRABAJO PRACTICO ESPECIAL WEB 2 - PRIMER ENTREGA 26/9
 
 ## Integrantes:
--Leopoldo Villa. villaleoo@hotmail.com .
--Gabriel Andres Garcia. 
+- Leopoldo Villa. villaleoo@hotmail.com .
+- Gabriel Andres Garcia. 
 
 ## Tematica:
 Sitio web con visualizacion de posiciones y resultados de futbol (similar www.promiedos.com.ar). La idea
@@ -12,15 +12,15 @@ y clubes. El usuario-cliente podra consultar informacion de una lista de ligas/c
 ## Diagrama DER
 Al diagrama lo componen las tablas Partido, Liga y Club.
 ### Entidades:
--Partido.
--Liga.
--Club.
+- Partido.
+- Liga.
+- Club.
 ### Atributos:
 Visibles en el archivo diagrama-der.pdf (ej. Partido: id_partido, fecha, hora, etc.).
 ### Relaciones:
-Partido -> Liga (un partido pertenece a una unica liga, relacion muchos a 1).
-Partido -> Club (un partido involucra a dos clubes, relacion muchos a 2).
-Club -> Liga (cada club pertenece a una liga, relacion muchos a uno).
+- Partido -> Liga (un partido pertenece a una unica liga, relacion muchos a 1).
+- Partido -> Club (un partido involucra a dos clubes, relacion muchos a 2).
+- Club -> Liga (cada club pertenece a una liga, relacion muchos a uno).
 ### Claves primarias y foraneas
 Las tres tablas poseen la clave primaria id. La tabla Partido incluye 3 claves foraneas que son los id de
 los clubes que disputan un partido y el nombre del estadio del club local. La tabla Club incluye una 
