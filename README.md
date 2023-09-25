@@ -11,17 +11,17 @@ y clubes. El usuario-cliente podra consultar informacion de una lista de ligas/c
 
 ## Diagrama DER
 Al diagrama lo componen las tablas Partido, Liga y Club.
-### Entidades:
+#### Entidades:
 - Partido.
 - Liga.
 - Club.
-### Atributos:
+#### Atributos:
 Visibles en el archivo diagrama-der.pdf (ej. Partido: id_partido, fecha, hora, etc.).
-### Relaciones:
+#### Relaciones:
 - Partido -> Liga (un partido pertenece a una unica liga, relacion muchos a 1).
 - Partido -> Club (un partido involucra a dos clubes, relacion muchos a 2).
 - Club -> Liga (cada club pertenece a una liga, relacion muchos a uno).
-### Claves primarias y foraneas
+#### Claves primarias y foraneas
 Las tres tablas poseen la clave primaria id. La tabla Partido incluye 3 claves foraneas que son los id de
 los clubes que disputan un partido y el nombre del estadio del club local. La tabla Club incluye una 
 clave foranea asociada al id de la liga perteneciente.
