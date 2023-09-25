@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-09-2023 a las 20:20:47
+-- Tiempo de generación: 25-09-2023 a las 21:47:10
 -- Versión del servidor: 10.4.28-MariaDB
--- Versión de PHP: 8.2.4
+-- Versión de PHP: 8.0.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -45,11 +45,18 @@ CREATE TABLE `liga` (
   `id_liga` int(11) NOT NULL,
   `nombre` varchar(45) NOT NULL,
   `pais` varchar(45) NOT NULL,
-  `formato` int(11) NOT NULL,
-  `reglas` text NOT NULL,
+  `formato` varchar(80) NOT NULL,
+  `reglas` varchar(300) NOT NULL,
   `cant_partidos` int(11) NOT NULL,
-  `divicion` int(11) NOT NULL
+  `division` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `liga`
+--
+
+INSERT INTO `liga` (`id_liga`, `nombre`, `pais`, `formato`, `reglas`, `cant_partidos`, `division`) VALUES
+(1, '', '', '0', '', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -64,8 +71,9 @@ CREATE TABLE `partido` (
   `id_liga` int(11) NOT NULL,
   `id_club_local` int(11) NOT NULL,
   `id_club_visita` int(11) NOT NULL,
-  `resultado` int(11) NOT NULL,
-  `canal_televisa_en_arg` varchar(45) NOT NULL,
+  `goles_local` int(11) DEFAULT NULL,
+  `goles_visita` int(11) DEFAULT NULL,
+  `canal_televisa_arg` varchar(45) DEFAULT NULL,
   `arbitro_asignado` varchar(45) NOT NULL,
   `estadio_club_local` varchar(45) NOT NULL,
   `duracion_en_minutos` int(11) NOT NULL
@@ -96,6 +104,18 @@ ALTER TABLE `partido`
 --
 -- AUTO_INCREMENT de las tablas volcadas
 --
+
+--
+-- AUTO_INCREMENT de la tabla `club`
+--
+ALTER TABLE `club`
+  MODIFY `id_club` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `liga`
+--
+ALTER TABLE `liga`
+  MODIFY `id_liga` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `partido`

@@ -6,8 +6,8 @@
 
 ## Tematica:
 Sitio web con visualizacion de posiciones y resultados de futbol (similar www.promiedos.com.ar). La idea
-es en principio que un usuario administrador pueda agregar ligas al sitio con sus respectivos partidos 
-y clubes. El usuario-cliente podra consultar informacion de una lista de ligas/copas o de una liga/copa en particular.Podra ver la lista de partidos que hay en el dia de la fecha (acorde a las ligas cargadas en el sistema). 
+es que un usuario administrador pueda agregar ligas al sitio con sus respectivos partidos 
+y clubes, y los usuarios-cliente puedan consultar informacion sobre cuando se juegan los partidos, posiciones y demas informacion de una serie/lista de ligas/copas y eventualmente de una liga/copa en particular aplicando filtros, buscando clubes y ligas. Ademas que el usuario-cliente pueda ver la lista de partidos que hay en el dia de la fecha filtrando por fecha de partido (acorde a las ligas cargadas en el sistema). 
 
 ## Diagrama DER
 Al diagrama lo componen las tablas Partido, Liga y Club.
@@ -16,7 +16,7 @@ Al diagrama lo componen las tablas Partido, Liga y Club.
 - Liga.
 - Club.
 #### Atributos:
-Visibles en el archivo diagrama-der.pdf (ej. Partido: id_partido, fecha, hora, etc.).
+Visibles en el archivo diagrama-der.pdf (ej.: atributos de tabla partido: id_partido, fecha, hora, id_liga, id_club_local, etc.).
 #### Relaciones:
 - Partido -> Liga (un partido pertenece a una unica liga, relacion muchos a 1).
 - Partido -> Club (un partido involucra a dos clubes, relacion muchos a 2).
@@ -27,6 +27,10 @@ los clubes que disputan un partido y el nombre del estadio del club local. La ta
 clave foranea asociada al id de la liga perteneciente.
 En el diagrama-der.pdf se marca como PK (primary key) a las claves primarias y como FK (foreigner key) a las claves foraneas.
 ## Tipos de datos
+ - Tabla partido: int, date (para fecha), timestamp (para horario), varchar.
+ - Tabla liga: int, varchar.
+ - Tabla club: int, varchar.
+
 
 
 
