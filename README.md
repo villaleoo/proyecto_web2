@@ -27,7 +27,9 @@ los clubes que disputan un partido y el nombre del estadio del club local. La ta
 clave foranea asociada al id de la liga perteneciente.
 En el diagrama-der.pdf se marca como PK (primary key) a las claves primarias y como FK (foreigner key) a las claves foraneas.
 - Todos los atributos fijados como PK (id's) se establecieron autoincrementales.
-- En la tabla Partido hay 3 atributos que pueden ser declarados como nulos (goles_local, goles_visita, canal_televisa) para partidos que tengan fecha futura.
+- En la tabla Partido hay atributos (5) que pueden ser nulos:
+    - fecha, hora y canal_televisa_arg para partidos los cuales no se hayan definido estas variables.
+    - goles_local y goles_visita para partidos con fecha futura, que no se hayan jugado.
 
 ## Tipos de datos
  - Tabla partido: int, date (para fecha), timestamp (para horario), varchar.

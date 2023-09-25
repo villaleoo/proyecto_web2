@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-09-2023 a las 21:47:10
+-- Tiempo de generación: 26-09-2023 a las 00:56:24
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.0.28
 
@@ -66,8 +66,8 @@ INSERT INTO `liga` (`id_liga`, `nombre`, `pais`, `formato`, `reglas`, `cant_part
 
 CREATE TABLE `partido` (
   `id_partido` int(11) NOT NULL,
-  `fecha` date NOT NULL,
-  `hora` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `fecha` date DEFAULT NULL,
+  `hora` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `id_liga` int(11) NOT NULL,
   `id_club_local` int(11) NOT NULL,
   `id_club_visita` int(11) NOT NULL,
