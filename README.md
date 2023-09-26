@@ -36,6 +36,9 @@ En el diagrama-der.pdf se marca como PK (primary key) a las claves primarias y c
  - Tabla liga: int, varchar.
  - Tabla club: int, varchar.
 
+## Posible crecimiento/mutacion de la web
+Es posible la refactorizacion de la finalidad del sitio e incluir una tabla usuario para que los usuarios-cliente puedan iniciar sesion y colocar una apuesta
+a un determinado partido. Para esto, hay ciertas cosas que no cambiarian en el sitio como el layout, la manera de enlistar/agrupar los partidos de cada liga y ciertas tablas como partido, liga y club. Esta refactorizacion seria para añadir mayor interaccion del usuario con la web y que pueda "hacer algo" similar a funcionalidades como agregar a favoritos o persistir algunos datos.  
 
 
 
