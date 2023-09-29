@@ -2,7 +2,7 @@
 
 ## Integrantes:
 - Leopoldo Villa. villaleoo@hotmail.com .
-- Gabriel Andres Garcia. gabrielandgarcia.995@gmail.com
+- Gabriel Andres Garcia. gabrielandgarcia.995@gmail.com .
 
 ## Tematica:
 Sitio web con visualizacion de posiciones y resultados de futbol (similar www.promiedos.com.ar). La idea
@@ -18,14 +18,14 @@ Al diagrama lo componen las tablas Partido, Liga y Club.
 #### Atributos:
 Visibles en el archivo diagrama-der.pdf (ej.: atributos de tabla partido: id_partido, fecha, hora, id_liga, id_club_local, etc.).
 #### Relaciones:
-- Partido -> Liga (un partido pertenece a una unica liga, relacion muchos a 1).
-- Partido -> Club (un partido involucra a dos clubes, relacion muchos a 2).
-- Club -> Liga (cada club pertenece a una liga, relacion muchos a 1).
+- Liga -> Partido (una liga puede tener muchos partidos, relacion 1 a muchos).
+- Partido -> Club (un partido involucra a dos clubes, doble relacion 1 a 1).
+- Club -> Liga (varios clubes pertenecen a una liga, relacion muchos a 1).
 #### Claves primarias y foraneas
 Las tres tablas poseen la clave primaria id. La tabla Partido incluye 3 claves foraneas que son los id de
-los clubes que disputan un partido y el nombre del estadio del club local. La tabla Club incluye una 
-clave foranea asociada al id de la liga perteneciente.
-En el diagrama-der.pdf se marca como PK (primary key) a las claves primarias y como FK (foreigner key) a las claves foraneas.
+los dos clubes involucrados y la liga por la cual disputan el partido. La tabla Club incluye una 
+clave foranea asociada al id de la liga a la cual pertenece.
+
 - Todos los atributos fijados como PK (id's) se establecieron autoincrementales.
 - En la tabla Partido hay atributos (5) que pueden ser nulos:
     - fecha, hora y canal_televisa_arg para partidos los cuales no se hayan definido estas variables.
