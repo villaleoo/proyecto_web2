@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-09-2023 a las 23:09:28
+-- Tiempo de generación: 08-10-2023 a las 01:32:56
 -- Versión del servidor: 10.4.28-MariaDB
--- Versión de PHP: 8.0.28
+-- Versión de PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,14 +24,13 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `club`
+-- Estructura de tabla para la tabla `clubes`
 --
 
-CREATE TABLE `club` (
+CREATE TABLE `clubes` (
   `id_club` int(11) NOT NULL,
   `nombre` varchar(45) NOT NULL,
   `ciudad` varchar(45) NOT NULL,
-  `id_liga` int(11) NOT NULL,
   `estadio` varchar(45) NOT NULL,
   `capacidad_estadio` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -39,37 +38,49 @@ CREATE TABLE `club` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `liga`
+-- Estructura de tabla para la tabla `ligas`
 --
 
-CREATE TABLE `liga` (
+CREATE TABLE `ligas` (
   `id_liga` int(11) NOT NULL,
   `nombre` varchar(45) NOT NULL,
   `pais` varchar(45) NOT NULL,
-  `formato` varchar(80) NOT NULL,
-  `reglas` varchar(300) NOT NULL,
+  `formato` int(11) NOT NULL,
+  `reglas` text NOT NULL,
   `cant_partidos` int(11) NOT NULL,
-  `division` int(11) NOT NULL
+  `divicion` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `partido`
+-- Estructura de tabla para la tabla `partidos`
 --
 
-CREATE TABLE `partido` (
+CREATE TABLE `partidos` (
   `id_partido` int(11) NOT NULL,
-  `fecha` date DEFAULT NULL,
-  `hora` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `fecha` date NOT NULL,
+  `hora` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `id_liga` int(11) NOT NULL,
   `id_club_local` int(11) NOT NULL,
   `id_club_visita` int(11) NOT NULL,
-  `goles_local` int(11) DEFAULT NULL,
-  `goles_visita` int(11) DEFAULT NULL,
-  `canal_televisa_arg` varchar(45) DEFAULT NULL,
+  `resultado` int(11) NOT NULL,
+  `canal_televisa_en_arg` varchar(45) NOT NULL,
   `arbitro_asignado` varchar(45) NOT NULL,
+  `estadio_club_local` varchar(45) NOT NULL,
   `duracion_en_minutos` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuarios`
+--
+
+CREATE TABLE `usuarios` (
+  `id` int(11) NOT NULL,
+  `nombre_usuario` varchar(40) NOT NULL,
+  `contrasenia` varchar(70) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -77,66 +88,44 @@ CREATE TABLE `partido` (
 --
 
 --
--- Indices de la tabla `club`
+-- Indices de la tabla `clubes`
 --
-ALTER TABLE `club`
-  ADD PRIMARY KEY (`id_club`),
-  ADD KEY `id_liga` (`id_liga`);
+ALTER TABLE `clubes`
+  ADD PRIMARY KEY (`id_club`);
 
 --
--- Indices de la tabla `liga`
+-- Indices de la tabla `ligas`
 --
-ALTER TABLE `liga`
+ALTER TABLE `ligas`
   ADD PRIMARY KEY (`id_liga`);
 
 --
--- Indices de la tabla `partido`
+-- Indices de la tabla `partidos`
 --
-ALTER TABLE `partido`
-  ADD PRIMARY KEY (`id_partido`),
-  ADD KEY `id_liga` (`id_liga`),
-  ADD KEY `id_club_local` (`id_club_local`),
-  ADD KEY `id_club_visita` (`id_club_visita`);
+ALTER TABLE `partidos`
+  ADD PRIMARY KEY (`id_partido`);
+
+--
+-- Indices de la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- AUTO_INCREMENT de la tabla `club`
+-- AUTO_INCREMENT de la tabla `partidos`
 --
-ALTER TABLE `club`
-  MODIFY `id_club` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `liga`
---
-ALTER TABLE `liga`
-  MODIFY `id_liga` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT de la tabla `partido`
---
-ALTER TABLE `partido`
+ALTER TABLE `partidos`
   MODIFY `id_partido` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- Restricciones para tablas volcadas
+-- AUTO_INCREMENT de la tabla `usuarios`
 --
-
---
--- Filtros para la tabla `club`
---
-ALTER TABLE `club`
-  ADD CONSTRAINT `club_ibfk_1` FOREIGN KEY (`id_liga`) REFERENCES `liga` (`id_liga`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `partido`
---
-ALTER TABLE `partido`
-  ADD CONSTRAINT `partido_ibfk_1` FOREIGN KEY (`id_liga`) REFERENCES `liga` (`id_liga`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `partido_ibfk_2` FOREIGN KEY (`id_club_local`) REFERENCES `club` (`id_club`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `partido_ibfk_3` FOREIGN KEY (`id_club_visita`) REFERENCES `club` (`id_club`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `usuarios`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
