@@ -12,10 +12,10 @@ class HomeController {
     private $view;
 
     public function __construct(){
-        $this->title = "Inicio";
+        $this->title= "Inicio";
         $this->layoutController= new LayoutController();
         $this->leagueController= new LeagueController();
-        $this->teamController = new TeamController();
+        $this->teamController= new TeamController();
         $this->view=new HomeView();
         
     }
