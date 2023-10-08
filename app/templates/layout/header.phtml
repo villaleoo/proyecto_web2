@@ -1,0 +1,37 @@
+<html>
+  
+<head>
+    <meta charset="UTF-8">
+    <!--etiqueta importante hace que links de este documento direccionen a partir de la raiz del sitio, por ejemplo: <a href:'home'></a> direcciona al home gracias a esta etiqueta-->
+    <base href="<?= BASE_URL ?>">   
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- IMPORT DE BOOTSTRAP -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/style.css">
+    <!-- FUNCIONALIDAD TITULO DINAMICO -->
+    <title><?php echo $title;?></title>
+</head>
+<body>
+  <header>
+    <nav class="navbar bg-danger bs-body-bg">
+      <div class="container-fluid justify-content-center flex-column">
+        <a class="logo-site-style">Navbar</a>
+        
+        <ul>
+            <?php foreach ($params as $key => $value ): ?>
+               <li><a href="<?php echo $key ?>"> <?php echo $key?> <a></li>
+            <?php endforeach ?>
+        </ul>   
+              
+        <!-- <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form> -->
+      </div>
+    </nav>
+      
+
+  </header>
+  
+    
