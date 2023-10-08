@@ -33,7 +33,7 @@ class HomeController {
    /*la funcion showHome le pide al controlador layout que renderice el header, manda a renderizar el contenido del home y luego pide layout que renderice el footer  */
    /*le puedo pedir al layout que me mande a renderizar otras secciones que esten viculadas al layout */
     public function showHome(){
-        $homeData= $this-> getCategories();
+        $homeData= $this-> getData();
 
         $this->layoutController->showHeader($this->title);
         $this->view->renderHome($homeData);    
