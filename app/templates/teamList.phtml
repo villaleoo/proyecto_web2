@@ -1,0 +1,6 @@
+
+<ul>
+<?php foreach($arrData as $team): ?>
+    <li><a href='<?= BASE_URL ?>clubes/<?=$team->id_club?>'><?= $team->nombre ?></a></li>
+<?php endforeach ?>
+</ul>
