@@ -1,5 +1,4 @@
 <html>
-  
 <head>
     <meta charset="UTF-8">
     <!--etiqueta importante hace que links de este documento direccionen a partir de la raiz del sitio, por ejemplo: <a href:'home'></a> direcciona al home gracias a esta etiqueta-->
@@ -23,7 +22,21 @@
             <?php foreach ($params as $key => $value ): ?>
                <li><a href="<?= $key ?>"> <?= $key?> <a></li>
             <?php endforeach ?>
-        </ul>   
+        </ul> 
+        
+        <?php session_start(); ?>
+        <?php if (!isset($_SESSION['USER_ID'])) : ?>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="login">Login</a>
+            </li>
+        <?php else : ?>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="logout">Logout  (<?= $_SESSION['USER_NAME'] ?>)</a>
+            </li>
+            <li><a href='admin'>Administrar ligas/equipos</a></li>
+        <?php endif ?>
+
+  
               
         <!-- <form class="d-flex" role="search">
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">

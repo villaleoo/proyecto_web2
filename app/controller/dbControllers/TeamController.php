@@ -1,7 +1,7 @@
 <?php
 include_once './app/model/TeamsModel.php';
 include_once './app/view/TeamView.php';
-include_once './app/controller/LayoutController.php';
+include_once './app/controller/siteControllers/LayoutController.php';
 
 class TeamController{
     private $model;

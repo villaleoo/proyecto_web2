@@ -1,7 +1,7 @@
 <?php 
-require_once './app/controller/LayoutController.php';
-require_once './app/controller/LeagueController.php';
-require_once './app/controller/TeamController.php';
+require_once './app/controller/siteControllers/LayoutController.php';
+require_once './app/controller/dbControllers/LeagueController.php';
+require_once './app/controller/dbControllers/TeamController.php';
 require_once './app/view/HomeView.php';
 
 class HomeController {

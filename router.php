@@ -1,5 +1,6 @@
 <?php
-    include_once './app/controller/HomeController.php';
+    include_once './app/controller/siteControllers/HomeController.php';
+    include_once './app/controller/SessionController.php';
     $INIT_APP="home";   /*ESTA CONSTANTE DETERMINA A DONDE SE DIRECCIONA CUANDO LA URL SEA SOLO LA RAIZ */
     $action=$INIT_APP; /*ASIGNAMOS A ACTION EL VALOR DE LA CONSTANTE POR DEFECTO. */
     define('BASE_URL', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']).'/');   /*OBTIENE/DETERMINA LA RAIZ DEL SITIO*/
@@ -27,7 +28,18 @@
                 $controllerTeam->showTeamsList();
             }
             break;
-        
+        case "login":
+            $controllerSession= new SessionController();
+            $controllerSession->showLogin();
+            break;
+        case 'auth':
+            $controllerSession = new SessionController();
+            $controllerSession->auth();
+            break;
+        case 'logout':
+            $controller = new SessionController();
+            $controller->logout();
+            break;
         default:
             echo "defaul";
             break;
