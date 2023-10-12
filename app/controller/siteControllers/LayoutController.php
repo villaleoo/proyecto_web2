@@ -26,7 +26,7 @@ class LayoutController {
         // $teams = $this->teamController->getTeams();
         /*OBTENGO EL CAMPO "ENTIDAD" COMBINANDO LIGAS Y CLUBES*/
         $categories= array("ligas" =>["liga1","liga2"], "clubes" =>["equipo1", "equipo2"]);    /*arreglo asociativo que guarda categorias e items */
-
+        
         return $categories;
     }
 
