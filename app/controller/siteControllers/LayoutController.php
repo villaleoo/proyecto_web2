@@ -1,6 +1,6 @@
 <?php
-require_once './app/controller/LeagueController.php';
-require_once './app/controller/TeamController.php';
+// require_once './app/controller/LeagueController.php';
+// require_once './app/controller/TeamController.php';
 require_once './app/view/LayoutView.php';
 /*La clase layout por ser solo una clase creada para ordenar la vista del sitio, solo se comunica con controladores (no con modelos) 
 y les solicita que le brinden informacion de la bbdd para mostrar la informacion en el header o en el footer, de esta manera se puede tener informacion dinamica en
@@ -9,13 +9,13 @@ las ligas, que el usuario pueda hacer click en esa liga y direccionarlo a esa li
 
 /*Layout controller puede tener showHeader,showFooter o secciones como sidebar u otras que necesiten de informacion de las ligas y equipos */
 class LayoutController {
-    private $leagueController;   /*Para mostrar la informacion de inicio (categorias e items),el controlador del home necesita comunicarse con las categorias y los items */
-    private $teamController;
+    // private $leagueController;   /*Para mostrar la informacion de inicio (categorias e items),el controlador del home necesita comunicarse con las categorias y los items */
+    // private $teamController;
     private $layoutView;
 
     public function __construct(){
-        $this->leagueController= new LeagueController();
-        $this->teamController= new TeamController();
+        // $this->leagueController= new LeagueController();
+        // $this->teamController= new TeamController();
         $this->layoutView= new LayoutView();
     }
 
@@ -25,8 +25,8 @@ class LayoutController {
         // $leagues= $this->leagueController->getLeagues();
         // $teams = $this->teamController->getTeams();
         /*OBTENGO EL CAMPO "ENTIDAD" COMBINANDO LIGAS Y CLUBES*/
-        $categories= array("ligas" =>["liga1","liga2"], "equipos" =>["equipo1", "equipo2"]);    /*arreglo asociativo que guarda categorias e items */
-
+        $categories= array("ligas" =>["liga1","liga2"], "clubes" =>["equipo1", "equipo2"]);    /*arreglo asociativo que guarda categorias e items */
+        
         return $categories;
     }
 
