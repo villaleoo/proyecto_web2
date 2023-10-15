@@ -24,9 +24,17 @@
         case "clubes":
             $controllerTeam= new TeamController();
             if(isset($params[1]) && !empty($params[1])){
-                $controllerTeam->showTeam($params[1]);
+                $controllerTeam->showItemDetail($params[1]);
             }else{
-                $controllerTeam->showTeamsList();
+                $controllerTeam->showItemList($params[0]);
+            }
+            break;
+        case "ligas":
+            $controllerLeague= new LeagueController();
+            if(isset($params[1]) && !empty($params[1])){
+                $controllerLeague->showItemDetail($params[1]);
+            }else{
+                $controllerLeague->showItemList($params[0]);
             }
             break;
         case "login":
@@ -43,7 +51,7 @@
             break;
         case "admin":
             $controllerAdmin= new AdminController ();
-
+            /*$params[2] es el item cuando se pide editar un item */
             if(isset($params[2]) && !empty($params[2])){
                 $controllerAdmin->showAdminCRUD($params[1], $params[2]);
                
@@ -59,7 +67,6 @@
             if(count($params) == 4){
                 $controllerAdmin->removeItem($params[1], $params[2]);
             }
-
             break;
         default:
             echo "defaul";

@@ -22,12 +22,14 @@ class SessionController {
         $userName = $_POST['userName'];
         $password= $_POST['password'];
 
+        if(!isset( $_POST['userName']) || !isset($_POST['password'])){
+            header('Location:'.BASE_URL);
+        }
 
         if (empty($userName) || empty($password)) {
             $this->view->renderFormLogin('Faltan completar datos.');
             return;
         }
-
         $user = $this->model->getUserByUserName($userName);
        
         if($user && password_verify($password, $user->contrasenia)){

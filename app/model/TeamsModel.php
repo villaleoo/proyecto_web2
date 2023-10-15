@@ -3,7 +3,7 @@ require_once './app/model/Model.php';
 
 class TeamsModel extends Model{
     
-    public function getTeams(){
+    public function getAllItems(){
         $request= $this->db->prepare("SELECT * FROM clubes WHERE 1");
         $request->execute();
         $arrTeams=$request->fetchAll(PDO::FETCH_OBJ);
@@ -12,16 +12,16 @@ class TeamsModel extends Model{
         return $arrTeams;
     }
 
-    public function getLeagueNameOfTeam($idLeague){
-        $request=$this->db->prepare("SELECT nombre FROM ligas WHERE id_liga= ?");
+    public function getNameOfLeague($idLeague){
+        $request=$this->db->prepare("SELECT nombre FROM ligas WHERE id= ?");
         $request->execute([$idLeague]);
         $nameLeague = $request->fetch(PDO::FETCH_OBJ);
 
         return $nameLeague;
     }
 
-    public function getTeam($id){
-        $request=$this->db->prepare("SELECT * FROM clubes WHERE id_club= ?");
+    public function getItem($id){
+        $request=$this->db->prepare("SELECT * FROM clubes WHERE id= ?");
         $request->execute([$id]);
         $team = $request->fetch(PDO::FETCH_OBJ);
 
@@ -29,9 +29,9 @@ class TeamsModel extends Model{
 
     }
 
-    public function updateTeam($team){
+    public function updateItem($team){
         $dataForm=$team["dataForm"];
-        $idTeam=$team["id_club"];
+        $idTeam=$team["id"];
        
         $varbinary_logo = pack("H*",bin2hex($dataForm["imagen_logo"]));
         $varbinary_stadium = pack("H*",bin2hex($dataForm["imagen_estadio"]));
@@ -39,13 +39,13 @@ class TeamsModel extends Model{
 
 
       
-        $request= $this->db->prepare("UPDATE clubes SET nombre= ?, ciudad =?, id_liga =?, nombre_estadio=?,capacidad_estadio=?,descripcion_historia=?,apodo=?,fecha_fundacion=?,imagen_logo=?,temporada_analisis=?,cant_partidos_jugados=?, goles_en_liga=?,goles_en_copa=?,promedio_edad_equipo=?,cantidad_jugadores=?,imagen_estadio=? WHERE id_club = ?");
+        $request= $this->db->prepare("UPDATE clubes SET nombre= ?, ciudad =?, id_liga =?, nombre_estadio=?,capacidad_estadio=?,descripcion_historia=?,apodo=?,fecha_fundacion=?,imagen_logo=?,temporada_analisis=?,cant_partidos_jugados=?, goles_en_liga=?,goles_en_copa=?,promedio_edad_equipo=?,cantidad_jugadores=?,imagen_estadio=? WHERE id = ?");
 
-        $request->execute([$dataForm["nombre"], $dataForm["ciudad"], $dataForm["id_liga"],$dataForm["nombre_estadio"],intval($dataForm["capacidad_estadio"]),$dataForm["descripcion_historia"],$dataForm["apodo"],$dateFundation, $varbinary_logo, intval($dataForm["temporada_analisis"]), intval($dataForm["cant_partidos_jugados"]), intval($dataForm["goles_en_liga"]),intval($dataForm["goles_en_copa"]),intval($dataForm["promedio_edad_equipo"]),intval($dataForm["cantidad_jugadores"]),$varbinary_stadium, $idTeam]);
+        $request->execute([$dataForm["nombre"], $dataForm["ciudad"], 2,$dataForm["nombre_estadio"],intval($dataForm["capacidad_estadio"]),$dataForm["descripcion_historia"],$dataForm["apodo"],$dateFundation, $varbinary_logo, intval($dataForm["temporada_analisis"]), intval($dataForm["cant_partidos_jugados"]), intval($dataForm["goles_en_liga"]),intval($dataForm["goles_en_copa"]),intval($dataForm["promedio_edad_equipo"]),intval($dataForm["cantidad_jugadores"]),$varbinary_stadium, $idTeam]);
        
     }
 
-    public function addTeam($team){
+    public function addItem($team){
         $dataTeam= $team["dataTeam"];
         $type=$team["entidad"];
         var_dump($dataTeam);
@@ -94,8 +94,8 @@ class TeamsModel extends Model{
 
     }
 
-    public function deleteTeam($idTeam){
-        $request=$this->db->prepare("DELETE FROM clubes WHERE id_club = ?");
+    public function deleteItem($idTeam){
+        $request=$this->db->prepare("DELETE FROM clubes WHERE id = ?");
         $request->execute([$idTeam]);
     }
 

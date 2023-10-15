@@ -1,6 +1,6 @@
 <section class='d-flex flex-column px-5' >
-    <h5 class='text-center bg-warning'>Editar club </h5>
-    <form action='admin/clubes/<?=$teamEdit->id_club?>' method='POST' class='mt-4 px-5 d-flex flex-column justify-content-center align-items-center border'>
+    <h5 class='text-center bg-warning'>Editando "<?=$teamEdit->nombre?>"</h5>
+    <form action='admin/clubes/<?=$teamEdit->id?>' method='POST' class='mt-4 px-5 d-flex flex-column justify-content-center align-items-center border'>
         <h6>Datos del club</h6>
         <label for='nombre'>Nombre </label>
         <input required type='text' max-lenght='100' name='nombre' placeholder='Nombre.' value="<?=$teamEdit->nombre?>" class='mx-5 w-50'>

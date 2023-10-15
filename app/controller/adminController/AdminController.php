@@ -27,17 +27,24 @@ class AdminController {
             header('Location:'.BASE_URL);         /*EN EL CASO DE QUE EL SISTEMA CREZCA/MODIFIQUE Y SE REQUIERA HACER UNA VISTA DE /ADMIN SE QUITA LA CONDICION*/
         }
 
-        
-        
-        $arrTeams= $this->controllerTeam->getTeams();
-        // $arrLeagues= $controllerLeague->getLeagues();
-        $arrLeagues= ["liga1", "liga2"];
-        $arrData= array("clubes" => $arrTeams, "ligas"=> $arrLeagues, "categoriaElegida" => $category);
+        $arrItems;
+        $arrData;
 
+        if($category == 'ligas'){
+            // $arrItems= $this->controllerLeague->getArrItems();
+            // $arrData= array("ligas" => $arrItems, "categoria" => $category);
+        }else{
+            $arrItems=$this->controllerTeam->getArrItems();
+            // $arrLeagues= $this->controllerLeague->getArrItems();
+            $arrLeagues= ["liga1", "liga2"];
 
+            $arrData= array("clubes" => $arrItems, "ligas" => $arrLeagues, "categoria" => $category);
+
+        }
+    
 
         if(isset($_POST) && !empty($_POST)){
-            if($this->isEmptyValues($_POST)){       /*MAS VALIDACIONES/VERIF AL POST EJEMPLO EQUIPO CONSIDERADO REPETIDO (RECORRO EQUIPOS Y RETORNO SI ENCUENTRA UNO CON NOMBRE IGUAL AL QUE VIENE POR POST) */
+            if($this->isEmptyValues($_POST, 2)){       /*MAS VALIDACIONES/VERIF AL POST EJEMPLO item CONSIDERADO REPETIDO (RECORRO items Y RETORNO SI ENCUENTRA UNO CON NOMBRE IGUAL AL QUE VIENE POR POST) */
                 $this->layout->showHeader("Admin");
                 $this->view->renderAdminCRUD($arrData, "Campo/s requeridos incompleto/s.");
                 $this->layout->showFooter();
@@ -46,16 +53,17 @@ class AdminController {
                 /*esta editando???? */
                 if($idItemEdit){
                     if($category == 'ligas'){
-                        echo "ligasarasasasasa";
-
+                        // $league= array("id" =>intval($idItemEdit),"dataForm"=> $_POST);
+                        // $this->controllerLeague->updateItem($league);
                     }else{
-                        $team= array("id_club" =>intval($idItemEdit),"dataForm"=> $_POST);
-                        $this->controllerTeam->updateTeam($team);
-                        
+                        $team= array("id" =>intval($idItemEdit),"dataForm"=> $_POST);
+                        $this->controllerTeam->updateItem($team);   
                     }
                      
                 }else{
                     if($category == 'ligas'){
+                        // $newLeague= array("dataTeam" => $_POST, "entidad" => 'liga');
+                        // $this->controllerLeague->addItem($newLeague);
 
                     }else{
                           /*agrego el nuevo club a la bbdd */
@@ -64,7 +72,7 @@ class AdminController {
                     }
                   
                 }
-                header('Location: '.BASE_URL."admin/clubes");
+                header('Location: '.BASE_URL."admin/$category");
             }
 
         }
@@ -72,22 +80,32 @@ class AdminController {
 
 
         $this->layout->showHeader("Admin");
+
         if($category == 'ligas'){
-            // $this->controllerRequired = new LeaguesController();
-            // $arrData= $this->controllerRequired->getLeagues();
-            // $this->view-> renderCRUD($arrData, $category);
+            // if(isset($idItemEdit)){
+            //     $league= $this->getLeagueById($idItemEdit);
+            //     if($league){
+            //         $this->view->renderLeagueCRUD($arrData,null,$league); /*agregar param team */
+            //     }else{
+            //         echo "ERROR URL NO EXISTE adminController";
+            //     }
+                
+            // }else{
+            //     $this->view->renderLeagueCRUD($arrData);
+            // }
+
         }else{
             
             if(isset($idItemEdit)){
                 $team= $this->getTeamById($idItemEdit);
                 if($team){
-                    $this->view->renderAdminCRUD($arrData,null,$team); /*agregar param team */
+                    $this->view->renderTeamCRUD($arrData,null,$team); /*agregar param team */
                 }else{
                     echo "ERROR URL NO EXISTE adminController";
                 }
                 
             }else{
-                $this->view->renderAdminCRUD($arrData);
+                $this->view->renderTeamCRUD($arrData);
             }
             
             
@@ -98,30 +116,36 @@ class AdminController {
     }
 
     public function showDeleteItem($category, $id){
+        AuthHelper::verifyAdminSession();
 
-
+        $this->layout->showHeader("Eliminar / FootballData⚽");
         if($category == "liga"){
-
-
+            // if($this->controllerLeague->getIndexByItemId($id) > 0){
+            //     $league= $this->controllerLeague->getItem($id);
+            //     $this->view->renderDeleteItem($team, 'ligas');
+            // }else{
+            //     echo "EEROR 404 adminController";
+            // }
 
         }else{
-            if($this->controllerTeam->getIndexTeam($id) > 0){
-                $team= $this->controllerTeam->getTeam($id);
-                $this->layout->showHeader("Eliminar / FootballData⚽");
+            if($this->controllerTeam->getIndexByItemId($id) > 0){
+                $team= $this->controllerTeam->getItem($id);
                 $this->view->renderDeleteItem($team, 'clubes');
-                $this->layout->showFooter();
+                
             }else{
                 echo "EEROR 404 adminController";
             }
         }
+        $this->layout->showFooter();
     }
 
-    public function removeItem($category, $idTeam){
+    public function removeItem($category, $id){
+        AuthHelper::verifyAdminSession();
         if($category == 'liga'){
+            // $this->controllerLeague->removeItem($id);
 
         }else{
-           
-            $this->controllerTeam->removeTeam($idTeam);
+            $this->controllerTeam->removeItem($id);
             
         }
         header('Location: '.BASE_URL."admin/clubes");
@@ -131,8 +155,7 @@ class AdminController {
 
 
 
-    private function isEmptyValues ($dataForm){
-        $qValuesNull= 2;
+    private function isEmptyValues ($dataForm ,$qValuesNull){
         $pos=0;
         foreach ($dataForm as $value) {
             $pos++;
@@ -147,12 +170,22 @@ class AdminController {
         return false;
     }
 
-    private function getTeamById($id){
-        if($this->controllerTeam-> getIndexTeam($id) < 0){
+    private function getLeagueById($id){
+        if($this->controllerLeague-> getIndexByItemId($id) < 0){
             return null;
         }
 
-        $team= $this->controllerTeam->getTeam($id);
+        $league= $this->controllerLeague->getItem($id);
+        return $league;
+
+    }
+
+    private function getTeamById($id){
+        if($this->controllerTeam-> getIndexByItemId($id) < 0){
+            return null;
+        }
+
+        $team= $this->controllerTeam->getItem($id);
         return $team;
 
     }

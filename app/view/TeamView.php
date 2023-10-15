@@ -1,13 +1,13 @@
 <?php 
-class TeamView{
+include_once './app/view/ItemView.php';
 
-
-    public function renderTeamsList($arrData){
-        require('./app/templates/teamList.phtml');
+class TeamView extends ItemView{
+    public function renderItemList($arrData){
+        require('./app/templates/itemTemplates/teamList.phtml');
 
     }
-    public function renderTeam($teamData){
-        require('./app/templates/teamDetail.phtml');
+    public function renderItemDetail($arrData){
+        require('./app/templates/itemTemplates/teamDetail.phtml');
     }
 }
 
