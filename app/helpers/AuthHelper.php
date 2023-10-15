@@ -27,4 +27,13 @@ class AuthHelper {
             die();
         }
     }
+
+    /*si no hay un usuario logueado o si el nombre de usuario no es webadmin, direccionalo al home*/
+    public static function verifyAdminSession(){
+        AuthHelper::init();
+        if( !isset($_SESSION['USER_ID']) || $_SESSION['USER_NAME'] != 'webadmin'){     
+            header('Location: '.BASE_URL);
+            die();
+        }
+    }
 }

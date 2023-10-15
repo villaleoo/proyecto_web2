@@ -12,8 +12,8 @@
 </head>
 <body>
 
-<div class='vh-100 vw-100 d-flex justify-content-evenly align-items-center flex-column'>
-<a href='<?=BASE_URL?>' >Inicio</a>
+<div class='vh-100  d-flex justify-content-evenly align-items-center flex-column'>
+<h5><a href='<?=BASE_URL?>'>↩Regresar a inicio</a></h5>
 <form action='auth' method='POST' class='w-50 h-75 px-5 d-flex flex-column justify-content-center align-items-center border position-relative' >
     <h4 class='position-absolute top-0 mt-5' >Iniciar sesion</h4>
     <div class='w-75 d-flex flex-column justify-content-center align-items-center'>
@@ -25,7 +25,7 @@
             <label for="exampleInputPassword1" class="form-label">Contraeña</label>
             <input type="password" class="form-control" id="exampleInputPassword1" max=70 name='password' placeholder='Contraseña'>
         </div>
-        <?php if ($error) : ?>
+        <?php if ($errorForm) : ?>
             <div class='alert alert-danger' role='alert'>
                 <?= $error ?>
             </div> 

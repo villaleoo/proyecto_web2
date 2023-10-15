@@ -15,19 +15,19 @@ class TeamController{
         
     }
 
-    public function getTeams(){
+    public function getTeams(){                                                     /*COMPARTE CON LIGAS */
         $arrTeams= $this->model->getTeams();
         return $arrTeams;
     }
 
-    public function showTeamsList(){
+    public function showTeamsList(){                                            /*COMPARTE CON LIGAS */
        
         $this->layout->showHeader("Clubes");
         $this->view->renderTeamsList($this->getTeams());
         $this->layout->showFooter();
     }
 
-    private function getIndexTeam($teamId){
+    public function getIndexTeam($teamId){                                              /*COMPARTE CON LIGAS */
         $pos=0;
 
         while ($pos < count($this->getTeams()) && $this->getTeams()[$pos]->id_club != intval($teamId) ) {
@@ -42,7 +42,7 @@ class TeamController{
 
     
 
-    public function showTeam($teamId){
+    public function showTeam($teamId){                                          /*COMPARTE CON LIGAS */
         $arrTeams= $this->getTeams();
        
 
@@ -58,6 +58,27 @@ class TeamController{
             $this->layout->showFooter();
         }else{
             echo "404 ERROR CLUB INEXISTENTE";
+        }
+    }
+
+    public function getTeam($id){                                       /*COMPARTE CON LIGAS */
+        $team= $this->model->getTeam($id);
+        return $team;
+    }
+
+    public function updateTeam($team){                                  /*COMPARTE CON LIGAS */
+       $this->model->updateTeam($team);
+    }
+    public function addTeam($team){                                     /*COMPARTE CON LIGAS */
+        $this->model->addTeam($team);
+    }
+
+    public function removeTeam($idTeam){                                    /*COMPARTE CON LIGAS */
+        if($this->getIndexTeam(intval($idTeam)) > 0){
+            $this->model->deleteTeam(intval($idTeam));
+
+        }else{
+            echo "ERROR NO EXISTE teamController";
         }
     }
     

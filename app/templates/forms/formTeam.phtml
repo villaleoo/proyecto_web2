@@ -1,0 +1,58 @@
+    
+    <section class='d-flex flex-column px-5' >
+        <h5 class='text-center bg-info' >Agregar nuevo club </h5>
+        <form action='admin/clubes' method='POST' class='mt-4 px-5 d-flex flex-column justify-content-center align-items-center border'>
+            <h6>Datos del club</h6>
+            <label for='nombre'>Nombre </label>
+            <input required type='text' max-lenght='100' name='nombre' placeholder='Nombre.' class='mx-5 w-50'>
+            <label for='apodo'>Apodo </label> 
+            <input required type='text' name='apodo' max-lenght='100' placeholder='Apodo.' class='mx-5 my-1 w-50'>
+            <label for='ciudad'>Ciudad</label>
+            <input required type='text' max-lenght='100' name='ciudad' placeholder='Ciudad.' class='mx-5 my-1 w-50'>
+            <label for='fecha_fundacion'>Fecha fundacion</label>
+            <input required type='date' name='fecha_fundacion' max-lenght='2023-10-05' placeholder='Fecha de fundacion.' class='mx-5 my-1'>
+            <label for='id_liga'>Liga perteneciente</label>
+            <select class='mx-5 my-1' name='id_liga'>
+                <?php foreach($arrData["ligas"] as $league): ?>
+                    <option value=2><?= $league ?></option>
+                <?php endforeach ?>
+            </select>
+            <label for='nombre_estadio'>Nombre estadio</label>
+            <input required type='text' max-lenght='100' name='nombre_estadio' placeholder='Nombre del estadio.' class='mx-5 my-1 w-50'>
+            <label for='capacidad_estadio'>Capacidad</label>
+            <input required type='number' name='capacidad_estadio' max='1000000' placeholder='Capacidad total del estadio.' class='mx-5 my-1 w-50'>
+            <label for='descripcion_historia'>Descripcion/historia</label>
+            <textarea required max-lenght='300' name='descripcion_historia' rows='5' placeholder='Breve historia del club/descripcion.' class='mx-5 my-1 w-50'></textarea>
+            <h6>Datos estadisticos</h6>
+            <label for='temporada_analisis'>Año de temporada analizada </label>
+            <input required type='number' name='temporada_analisis' min='1980' max='2022' placeholder='Año de temporada de analisis.' class='mx-5 my-1 w-50'>
+            <label for='cant_partidos_jugados'>Cant. partidos jugados en temporada</label>
+            <input required type='number' name='cant_partidos_jugados' min='10' max='200' placeholder='Cantidad de partidos jugados.' class='mx-5 my-1 w-50'>
+            <label for='goles_en_liga'>Cant. goles en liga </label>
+            <input required type='number' name='goles_en_liga' min='0' max='500' placeholder='Goles en liga.' class='mx-5 my-1 w-50'>
+            <label for='goles_en_copa'>Cant. goles en copas </label>
+            <input required type='number' name='goles_en_copa' min='0' max='500' placeholder='Goles en copa.' class='mx-5 my-1 w-50'>
+            <label for='promedio_edad_equipo'>Promedio de edad del equipo</label>
+            <input required type='number' name='promedio_edad_equipo' min='0' max='500' placeholder='Promedio de edad.' class='mx-5 my-1 w-50'>
+            <label for='cantidad_jugadores'>Cant. jugadores en temporada</label>
+            <input required type='number' name='cantidad_jugadores' min='0' max='500' placeholder='Cant. jugadores.' class='mx-5 my-1 w-50'>
+            <h6>Imagenes opcionales</h6>
+            <label for='imagen_logo'>Escudo del club</label>
+            <input type='file' name='imagen_logo' class='mx-5 my-1'>
+            <label for='imagen_estadio'>Imagen de estadio</label>
+            <input type='file' name='imagen_estadio' class='mx-5 my-1'>
+            <?php if ($errorForm) : ?>
+            <div class='alert alert-danger mt-3' role='alert'>
+                <?= $errorForm ?>
+            </div> 
+            <?php endif ?>
+            
+            <button type='submit' class='btn btn-outline-dark w-25 my-3'>Agregar club</button>
+        </form>
+    </section>
+
+
+
+</main>
+
+
