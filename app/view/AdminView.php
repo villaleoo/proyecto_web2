@@ -3,8 +3,8 @@ class AdminView{
 
 
     public function renderTeamCRUD($arrData, $errorForm = null, $teamEdit=null){
-        require('./app/templates/adminItemList.phtml');
-
+        require('./app/templates/itemTemplates/adminTeamList.phtml');
+        
         if(isset($teamEdit)){
             require('./app/templates/forms/updateTeam.phtml');
         }else{
@@ -13,7 +13,7 @@ class AdminView{
     }
 
     public function renderLeagueCRUD($arrData, $errorForm = null, $leagueEdit=null){
-        require('./app/templates/adminCategoryList.phtml');
+        require('./app/templates/categoryTemplates/adminLeagueList.phtml');
 
         if(isset($leagueEdit)){
             require('./app/templates/forms/updateLeague.phtml');

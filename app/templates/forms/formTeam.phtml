@@ -1,5 +1,7 @@
-    
     <section class='d-flex flex-column px-5' >
+        <?php if(empty($arrData["ligas"])): ?>
+            <h5 class='text-center bg-warning' >Para agregar un club es necesario contar con al menos 1 liga.</h5>
+        <?php else: ?>  
         <h5 class='text-center bg-info' >Agregar nuevo club </h5>
         <form action='admin/clubes' method='POST' class='mt-4 px-5 d-flex flex-column justify-content-center align-items-center border'>
             <h6>Datos del club</h6>
@@ -13,9 +15,9 @@
             <input required type='date' name='fecha_fundacion' max-lenght='2023-10-05' placeholder='Fecha de fundacion.' class='mx-5 my-1'>
             <label for='id_liga'>Liga perteneciente</label>
             <select class='mx-5 my-1' name='id_liga'>
-                <?php foreach($arrData["ligas"] as $league): ?>
-                    <option value=2><?= $league ?></option>
-                <?php endforeach ?>
+                <?php for ($i=0; $i < count($arrData["ligas"]) ; $i++): ?> 
+                    <option value='<?=$arrData["ligas"][$i]->id?>'><?=$arrData["ligas"][$i]->nombre?></option>
+                <?php endfor ?>
             </select>
             <label for='nombre_estadio'>Nombre estadio</label>
             <input required type='text' max-lenght='100' name='nombre_estadio' placeholder='Nombre del estadio.' class='mx-5 my-1 w-50'>
@@ -49,6 +51,7 @@
             
             <button type='submit' class='btn btn-outline-dark w-25 my-3'>Agregar club</button>
         </form>
+        <?php endif ?>
     </section>
 
 

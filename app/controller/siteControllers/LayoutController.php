@@ -35,7 +35,8 @@ class LayoutController {
     ya que le html del header se usa como plantilla en todo el sitio*/
     public function showHeader($title){
         $categories= $this->getCategories();
-        $this->layoutView->renderHeader($categories, $title);
+        $titleTransform = strtoupper(substr($title, 0, 1)) . substr($title, 1); 
+        $this->layoutView->renderHeader($categories, $titleTransform);
     }
     /*muestra el footer y puede pedir categorias si lo desea a traves de getCategories */
     public function showFooter(){

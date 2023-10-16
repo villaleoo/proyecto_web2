@@ -1,0 +1,10 @@
+<a href='ligas' >Volver</a>
+<h6>➡ Liga / </h6>
+<h2>Nombre: <?= $arrData["liga"]->nombre ?></h2>
+<h4>Pais: <?= $arrData["liga"]->pais ?></h4>
+<h5>Descripcion: <?= $arrData["liga"]->descripcion ?></h5>
+<h6>Clubes que la componen: </h6>
+<ul>
+<?php for ($i=0; $i < count($arrData["clubes"]); $i++): ?> 
+   <li><?=$arrData["clubes"][$i]->nombre?></li>
+<?php endfor ?>

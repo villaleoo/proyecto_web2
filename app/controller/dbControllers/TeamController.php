@@ -16,7 +16,7 @@ class TeamController extends ItemController{
 
         if($this->getIndexByItemId($id) >= 0){
             $posInArray=$this->getIndexByItemId($id);
-            $title = strtoupper(substr($arrItems[$posInArray]->nombre, 0, 1)) . substr($arrItems[$posInArray]->nombre, 1); 
+            $title = $arrItems[$posInArray]->nombre;
             
             $nameOfLeague=$this->model->getNameOfLeague($arrItems[$posInArray]->id_liga);
             

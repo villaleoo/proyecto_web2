@@ -11,7 +11,7 @@ abstract class ItemController{
         $this->model= $model;
     }
 
-    public function getArrItems(){                                                     /*COMPARTE CON LIGAS */
+    public function getArrItems(){                                        /*COMPARTE CON LIGAS */
         $arrItems= $this->model->getAllItems();
         return $arrItems;
     }
@@ -34,16 +34,18 @@ abstract class ItemController{
         return $item;
     }
 
-    public function addItem($item){                                     /*COMPARTE CON LIGAS */
-        $this->model->addItem($item);
+    public function addItem($item){ 
+        $newItem= $this->_toLowerCaseData($item);                                    /*COMPARTE CON LIGAS */
+        $this->model->addItem($newItem);
     }
 
-    public function updateItem($item){                                  /*COMPARTE CON LIGAS */
-        $this->model->updateItem($item);
+    public function updateItem($item){  
+        $itemEdit= $this->_toLowerCaseData($item);                               /*COMPARTE CON LIGAS */
+        $this->model->updateItem($itemEdit);
     }
 
     public function removeItem($id){                                    /*COMPARTE CON LIGAS */
-        if($this->getIndexByItemId(intval($id)) > 0){
+        if($this->getIndexByItemId(intval($id)) >= 0){
             $this->model->deleteItem(intval($id));
 
         }else{
@@ -59,6 +61,18 @@ abstract class ItemController{
     }
     
     public abstract function showItemDetail($id);
+
+    private function _toLowerCaseData($item){
+        $formData= $item[0];
+        foreach ($formData as $input => $value) {
+            if (is_string($value)) { 
+                $formData[$input] = strtolower($value); 
+            }
+        }
+        $item = array(0 => $formData, 1=> $item[1]);
+
+        return $item;
+    }
 
 
 }

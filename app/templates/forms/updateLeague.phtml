@@ -1,0 +1,36 @@
+<section class='d-flex flex-column px-5'>
+    <h5 class='text-center bg-warning' >Editando "<?=$leagueEdit->nombre?>"</h5>
+    <form action='admin/ligas/<?=$leagueEdit->id?>' method='POST' class='mt-4 px-5 d-flex flex-column justify-content-center align-items-center border'>
+        <h6>Datos de la liga</h6>
+        <label for='nombre'>Nombre </label>
+        <input required type='text' max-lenght='100' name='nombre' value='<?=$leagueEdit->nombre?>' placeholder='Nombre.' class='mx-5 w-50'>
+        <label for='pais'>Pais </label>
+        <input required type='text' max-lenght='80' name='pais' value='<?=$leagueEdit->pais?>' placeholder='Pais de origen.' class='mx-5 w-50'>
+        <label for='formato'>Formato </label>
+        <input required type='text' max-lenght='80' name='formato' value='<?=$leagueEdit->formato?>' placeholder='Ejemplo: liguilla/eliminacion directa' class='mx-5 w-50'>
+        <label for='reglas'>Reglas de juego</label>
+        <textarea required max-lenght='300' name='reglas' rows='5' placeholder='Definicion por penales, tiempo extra, cantidad de jugadores,etc.' class='mx-5 my-1 w-50'><?=$leagueEdit->reglas?></textarea>
+        <label for='cant_partidos'>Cantidad de partidos por temporada</label>
+        <input required type='number' max='300' name='cant_partidos' value='<?=$leagueEdit->cant_partidos?>' placeholder='Cantidad.' class='mx-5 w-50'>
+        <label for='division'>Division</label>
+        <input required type='number' max='50' name='division' value='<?=$leagueEdit->division?>' placeholder='1 para primera division, 2 para segunda...' class='mx-5 w-50'>
+        <label for='fecha_fundacion'>Fecha de fundacion</label>
+        <input required type='date' name='fecha_fundacion' max-lenght='2023-10-05' value='<?=$leagueEdit->fecha_fundacion?>' placeholder='Fecha de fundacion.' class='mx-5 my-1'>
+        <label for='descripcion'>Breve descripcion/historia</label>
+        <textarea required max-lenght='300' name='descripcion' rows='5' placeholder='Descripcion.' class='mx-5 my-1 w-50'><?=$leagueEdit->descripcion?></textarea>
+        <label for='temporada'>Temporada actual</label>
+        <input required type='number' max='3000' name='temporada'value='<?=$leagueEdit->temporada?>' placeholder='Temporada actual.' class='mx-5 w-50'>
+        <h6>Imagenes opcionales</h6>
+        <label for='imagen_logo'>Escudo</label>
+        <input type='file' name='imagen_logo' value='<?=$leagueEdit->imagen_logo?>' class='mx-5 my-1'>
+        <label for='imagen_pais'>Imagen del pais de origen</label>
+        <input type='file' name='imagen_pais' value='<?=$leagueEdit->imagen_pais?>' class='mx-5 my-1'>
+        <?php if ($errorForm) : ?>
+        <div class='alert alert-danger mt-3' role='alert'>
+            <?= $errorForm ?>
+        </div> 
+        <?php endif ?>
+        <button type='submit' class='btn btn-outline-dark w-25 my-3'>Editar liga</button>
+        <a href='<?= BASE_URL?>admin/ligas' class='btn btn-dark w-25' >Cancelar edicion</a>
+    </form>
+</section>

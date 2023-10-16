@@ -12,16 +12,14 @@ class LeagueController extends ItemController{
     public function showItemDetail($id){                                         
         $arrItems= $this->getArrItems();
        
-
         if($this->getIndexByItemId($id) >= 0){
             $posInArray=$this->getIndexByItemId($id);
-            $title = strtoupper(substr($arrItems[$posInArray]->nombre, 0, 1)) . substr($arrItems[$posInArray]->nombre, 1); 
             
-            $arrTeamsOfLeague=$this->model->getTeamsOfLeague($arrItems[$posInArray]->id); /*buscar en la tabla de clubes todos los clubes q tengan este id */
+            $arrTeamsOfLeague=$this->model->getTeamsOfLeague($arrItems[$posInArray]->id); /*buscar en la tabla de clubes todos los clubes q tengan este id de liga */
             
             $arrData= array($arrItems[$posInArray]->entidad =>$arrItems[$posInArray], "clubes" => $arrTeamsOfLeague);
 
-            $this->layout->showHeader($title);
+            $this->layout->showHeader($arrItems[$posInArray]->nombre);
             $this->view->renderItemDetail($arrData);
             $this->layout->showFooter();
         }else{

@@ -1,3 +1,4 @@
+
 <section class='d-flex flex-column px-5' >
     <h5 class='text-center bg-warning'>Editando "<?=$teamEdit->nombre?>"</h5>
     <form action='admin/clubes/<?=$teamEdit->id?>' method='POST' class='mt-4 px-5 d-flex flex-column justify-content-center align-items-center border'>
@@ -12,13 +13,13 @@
         <input required type='date' name='fecha_fundacion' max-lenght='2023-10-05' placeholder='Fecha de fundacion.' value="<?=$teamEdit->fecha_fundacion?>" class='mx-5 my-1'>
         <label from='id_liga' >Liga perteneciente</label>
         <select class='mx-5 my-1' name='id_liga'>
-            <?php foreach($arrData["ligas"] as $league): ?>
-                <?php if($league == "liga2"): ?>
-                    <option selected value=2 ><?= $league ?></option>
-                <?php else:?>
-                    <option value=2><?= $league ?></option>
-                <?php endif ?>
-            <?php endforeach ?>
+        <?php for ($i=0; $i < count($arrData["ligas"]) ; $i++): ?> 
+            <?php if($arrData["ligas"][$i]->id == $teamEdit->id_liga): ?>
+                <option selected value='<?=$arrData["ligas"][$i]->id?>'><?=$arrData["ligas"][$i]->nombre?></option>
+            <?php else: ?>
+            <option value='<?=$arrData["ligas"][$i]->id?>'><?=$arrData["ligas"][$i]->nombre?></option>
+            <?php endif ?>
+        <?php endfor ?>
         </select>
         <label for='nombre_estadio'>Nombre estadio</label>
         <input required type='text' max-lenght='100' name='nombre_estadio' placeholder='Nombre del estadio.' value="<?=$teamEdit->nombre_estadio?>" class='mx-5 my-1 w-50'>

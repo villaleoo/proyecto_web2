@@ -2,6 +2,7 @@
 require_once './app/model/Model.php';
 
 class TeamsModel extends Model{
+   
     
     public function getAllItems(){
         $request= $this->db->prepare("SELECT * FROM clubes WHERE 1");
@@ -30,8 +31,8 @@ class TeamsModel extends Model{
     }
 
     public function updateItem($team){
-        $dataForm=$team["dataForm"];
-        $idTeam=$team["id"];
+        $dataForm=$team[0];
+        $idTeam=$team[1];
        
         $varbinary_logo = pack("H*",bin2hex($dataForm["imagen_logo"]));
         $varbinary_stadium = pack("H*",bin2hex($dataForm["imagen_estadio"]));
@@ -46,10 +47,8 @@ class TeamsModel extends Model{
     }
 
     public function addItem($team){
-        $dataTeam= $team["dataTeam"];
-        $type=$team["entidad"];
-        var_dump($dataTeam);
-        var_dump($type);
+        $dataTeam= $team[0];
+        $type=$team[1];
         $varbinary_logo = pack("H*",bin2hex($dataTeam["imagen_logo"]));
         $varbinary_stadium = pack("H*",bin2hex($dataTeam["imagen_estadio"]));
         $dateFundation=date("Y-m-d", strtotime($dataTeam["fecha_fundacion"]));
