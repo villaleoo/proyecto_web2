@@ -26,6 +26,10 @@ class AdminView{
         require('./app/templates/forms/deleteItem.phtml');
     }
 
+    public function renderError(){
+        require('./app/templates/error/genericError.phtml');
+    }
+
 
 }
 

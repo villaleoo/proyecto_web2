@@ -9,6 +9,7 @@ class LeagueView extends ItemView{
     public function renderItemDetail($arrData){
         require('./app/templates/categoryTemplates/leagueDetail.phtml');
     }
+    
 
 
     

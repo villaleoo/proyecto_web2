@@ -49,7 +49,9 @@ abstract class ItemController{
             $this->model->deleteItem(intval($id));
 
         }else{
-            echo "ERROR NO EXISTE teamController";
+            $this->layout->showHeader("error");
+            $this->showError();
+            $this->layout->showFooter();
         }
     }
     
@@ -72,6 +74,10 @@ abstract class ItemController{
         $item = array(0 => $formData, 1=> $item[1]);
 
         return $item;
+    }
+
+    public function showError(){
+        $this->view->renderError();
     }
 
 

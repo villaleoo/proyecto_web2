@@ -9,6 +9,8 @@ class TeamView extends ItemView{
     public function renderItemDetail($arrData){
         require('./app/templates/itemTemplates/teamDetail.phtml');
     }
+    
+
 }
 
 ?>

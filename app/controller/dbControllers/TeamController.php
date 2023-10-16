@@ -26,7 +26,9 @@ class TeamController extends ItemController{
             $this->view->renderItemDetail($arrData);
             $this->layout->showFooter();
         }else{
-            echo "404 ERROR CLUB INEXISTENTE";
+            $this->layout->showHeader("Error");
+            $this->showError();
+            $this->layout->showFooter();
         }
     }
   

@@ -27,7 +27,7 @@ class SessionController {
         }
 
         if (empty($userName) || empty($password)) {
-            $this->view->renderFormLogin('Faltan completar datos.');
+            $this->view->renderFormLogin('Campo/s incompleto/s.');
             return;
         }
         $user = $this->model->getUserByUserName($userName);

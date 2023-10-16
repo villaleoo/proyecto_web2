@@ -23,11 +23,11 @@
         </div>
         <div class="mb-3 w-75">
             <label for="exampleInputPassword1" class="form-label">Contraeña</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" max=70 name='password' placeholder='Contraseña'>
+            <input required type="password" class="form-control" id="exampleInputPassword1" max=70 name='password' placeholder='Contraseña'>
         </div>
         <?php if ($errorForm) : ?>
             <div class='alert alert-danger' role='alert'>
-                <?= $error ?>
+                <?= $errorForm ?>
             </div> 
         <?php endif ?>
         <button type="submit" class="btn btn-primary">Iniciar sesion</button>

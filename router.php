@@ -1,7 +1,8 @@
 <?php
     include_once './app/controller/siteControllers/HomeController.php';
     include_once './app/controller/SessionController.php';
-    include_once './app/controller/adminController/AdminController.php';
+    include_once './app/controller/adminController/AdminTeamController.php';
+    include_once './app/controller/adminController/AdminLeagueController.php';
     $INIT_APP="home";   /*ESTA CONSTANTE DETERMINA A DONDE SE DIRECCIONA CUANDO LA URL SEA SOLO LA RAIZ */
     $action=$INIT_APP; /*ASIGNAMOS A ACTION EL VALOR DE LA CONSTANTE POR DEFECTO. */
     define('BASE_URL', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']).'/');   /*OBTIENE/DETERMINA LA RAIZ DEL SITIO*/
@@ -50,26 +51,55 @@
             $controllerSession->logout();
             break;
         case "admin":
-            $controllerAdmin= new AdminController ();
-            /*$params[2] es el item cuando se pide editar un item */
-            if(isset($params[2]) && !empty($params[2])){
-                $controllerAdmin->showAdminCRUD($params[1], $params[2]);
-               
-            }else{
-                $controllerAdmin->showAdminCRUD($params[1]);
+            $edit= isset($params[2]) && !empty($params[2]);
+            switch ($params[1]) {
+                case 'ligas':
+                    $controllerAdmin= new AdminLeagueController();
+                    if($edit){
+                        $controllerAdmin->adminCRUD($params[2]);
+                    }else{
+                        $controllerAdmin->adminCRUD();
+                    }
+                    break;
+                case 'clubes':
+                    $controllerAdmin= new AdminTeamController();
+                    if($edit){
+                        $controllerAdmin->adminCRUD($params[2]);
+                    }else{
+                        $controllerAdmin->adminCRUD();
+                    }
+                    break;
+                default:
+                    header('Location: '.BASE_URL);
+                    break;
             }
             break;
         case "eliminar":
-            $controllerAdmin = new AdminController();
-            if(count($params) == 3){
-                $controllerAdmin->showDeleteItem($params[1], $params[2]);
-            }
-            if(count($params) == 4){
-                $controllerAdmin->removeItem($params[1], $params[2]);
+            $qParams= count($params);
+            switch ($params[1]) {
+                case 'liga':
+                    $controllerAdmin= new AdminLeagueController();
+                    if($qParams == 3){
+                        $controllerAdmin->showDeleteItem($params[2]);
+                    }elseif ($qParams == 4) {
+                        $controllerAdmin->removeItem($params[2]);
+                    }
+                    break;
+                case 'club':
+                    $controllerAdmin= new AdminTeamController();
+                    if($qParams == 3){
+                        $controllerAdmin->showDeleteItem($params[2]);
+                    }elseif ($qParams == 4) {
+                        $controllerAdmin->removeItem($params[2]);
+                    }
+                    break;
+                default:
+                    header('Location: '.BASE_URL);
+                    break;
             }
             break;
         default:
-            echo "defaul";
+            header('Location: '.BASE_URL);
             break;
     }
 

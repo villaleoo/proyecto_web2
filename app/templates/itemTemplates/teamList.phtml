@@ -1,6 +1,9 @@
-
+<?php if(empty($arrData)):?>
+    <h5 class='text-center'>No hay clubes cargados</h5>
+<?php else: ?>
 <ul>
 <?php foreach($arrData as $team): ?>
     <li><a href='<?= BASE_URL ?>clubes/<?=$team->id?>'><?= $team->nombre ?></a></li>
 <?php endforeach ?>
 </ul>
+<?php endif ?>
