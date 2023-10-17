@@ -58,6 +58,7 @@ class AdminLeagueController extends AdminController {
         return $league;
 
     }
+
     public function validationLenghtInput($arrForm){
         return count($arrForm) != $this->quantityData;
     }
