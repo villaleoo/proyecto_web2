@@ -1,7 +1,7 @@
 <!-- //main se cierra en el formulario // -->
 <main class="d-flex flex-column" >
-    <section class='border-bottom mb-4' >    
-        <div class='d-flex flex-column align-items-center justify-content-center w-100  container-list' >
+    <section class='border-bottom mb-4 vh-70' >    
+        <div class='d-flex flex-column align-items-center justify-content-center w-100 h-100 container-list' >
             <h5>Lista de <?=$arrData["categoria"]?></h5>
           
             <ul class='h-100 w-75 px-0 d-flex flex-column border overflow-auto order-info-content' data-bs-spy="scroll">
@@ -11,8 +11,8 @@
                 <?php $count=1?>
                 <?php foreach($arrData["clubes"] as $team ): ?> 
                     <li class='w-100 d-flex justify-content-between align-items-center border-bottom'>
-                        <div>
-                            <p><?= $count ?> - <?= $team->nombre ?></p>
+                        <div class='mx-3'>
+                            <p><span class='fw-bolder'><?= $count ?></span> - <?= ucwords($team->nombre) ?></p>
                         </div>
                         <div>
                             <a href='<?=BASE_URL?>admin/clubes/<?= $team->id?>' class='btn btn-outline-dark' >Editar</a>

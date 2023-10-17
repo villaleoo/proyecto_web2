@@ -9,7 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="<?= BASE_URL ?>/css/style.css">
     <!-- FUNCIONALIDAD TITULO DINAMICO -->
-    <title><?= $title;?> / FootballData ⚽</title>
+    <title><?= ucwords($title);?> / FootballData ⚽</title>
 </head>
 <body>
   <header>
@@ -26,9 +26,8 @@
           <div class="collapse navbar-collapse w-15" id="navbarNavDropdown">
           
             <ul class="navbar-nav w-100 d-flex justify-content-end align-items-center">
-                <li class='mx-4' ><a href='<?= BASE_URL ?>' >Inicio</a></li>
                 <?php foreach ($params as $key => $value ): ?>
-                   <li class='mx-4'><a href="<?= $key ?>"><?= $key?><a></li>
+                   <li class='mx-4'><a href="<?= $key ?>"><?= ucfirst($key)?><a></li>
                 <?php endforeach ?>
 
                 <?php AuthHelper::init(); ?>
@@ -52,25 +51,14 @@
                   <?php endif ?>    
                                   
             </ul>
-              <!-- <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                  </form> --> 
+             
           </div>
         </div>
-      </nav>
-
-
-
-
-
-  
-              
+      </nav>    
 
       </div>
     </nav>
       
-
   </header>
   
     

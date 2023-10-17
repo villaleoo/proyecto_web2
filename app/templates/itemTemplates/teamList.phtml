@@ -1,9 +1,12 @@
 <?php if(empty($arrData)):?>
-    <h5 class='text-center'>No hay clubes cargados</h5>
-<?php else: ?>
-<ul>
-<?php foreach($arrData as $team): ?>
-    <li><a href='<?= BASE_URL ?>clubes/<?=$team->id?>'><?= $team->nombre ?></a></li>
-<?php endforeach ?>
-</ul>
+        <h5 class='text-center'>No hay clubes cargados</h5>
+    <?php else: ?>
+<section class='w-100 d-flex align-items-center flex-column' >
+    <h3 class='my-3'>🛡 Clubes 🛡</h3>
+    <ul class='w-75 h-100 d-flex flex-column align-items-center px-5'>
+    <?php foreach($arrData as $team): ?>
+        <li class='my-2 w-75 d-flex  justify-content-center' ><h4 >⚽ <a href='<?= BASE_URL ?>clubes/<?=$team->id?>'><?= strtoupper($team->nombre) ?></a> </h4></li>
+    <?php endforeach ?>
+    </ul>
+</section>
 <?php endif ?>

@@ -1,35 +1,54 @@
 <section class='d-flex flex-column px-5'>
     <h5 class='text-center bg-info' >Agregar nueva liga</h5>
     <form action='admin/ligas' method='POST' class='mt-4 px-5 d-flex flex-column justify-content-center align-items-center border'>
-        <h6>Datos de la liga</h6>
-        <label for='nombre'>Nombre </label>
-        <input required type='text' max-lenght='100' name='nombre' placeholder='Nombre.' class='mx-5 w-50'>
-        <label for='pais'>Pais </label>
-        <input required type='text' max-lenght='80' name='pais' placeholder='Pais de origen.' class='mx-5 w-50'>
-        <label for='formato'>Formato </label>
-        <input required type='text' max-lenght='80' name='formato' placeholder='Ejemplo: liguilla/eliminacion directa' class='mx-5 w-50'>
-        <label for='reglas'>Reglas de juego</label>
-        <textarea required max-lenght='300' name='reglas' rows='5' placeholder='Definicion por penales, tiempo extra, cantidad de jugadores,etc.' class='mx-5 my-1 w-50'></textarea>
-        <label for='cant_partidos'>Cantidad de partidos por temporada</label>
-        <input required type='number' max='300' name='cant_partidos' placeholder='Cantidad.' class='mx-5 w-50'>
-        <label for='division'>Division</label>
-        <input required type='number' max='50' name='division' placeholder='1 para primera division, 2 para segunda...' class='mx-5 w-50'>
-        <label for='fecha_fundacion'>Fecha de fundacion</label>
-        <input required type='date' name='fecha_fundacion' max-lenght='2023-10-05' placeholder='Fecha de fundacion.' class='mx-5 my-1'>
-        <label for='descripcion'>Breve descripcion/historia</label>
-        <textarea required max-lenght='300' name='descripcion' rows='5' placeholder='Descripcion.' class='mx-5 my-1 w-50'></textarea>
-        <label for='temporada'>Temporada actual</label>
-        <input required type='number' max='3000' name='temporada' placeholder='Temporada actual.' class='mx-5 w-50'>
-        <h6>Imagenes opcionales</h6>
-        <label for='imagen_logo'>Escudo</label>
-        <input type='file' name='imagen_logo' class='mx-5 my-1'>
-        <label for='imagen_pais'>Imagen del pais de origen</label>
-        <input type='file' name='imagen_pais' class='mx-5 my-1'>
+        <h6 class='border-bottom w-100 text-center' >Datos de la liga</h6>
+            <div class='d-flex w-100'>   
+                <div class='d-flex flex-column w-50 align-items-center'>
+                    <label for='nombre'>Nombre </label>
+                    <input required type='text' max-lenght='100' name='nombre' placeholder='Nombre.' class='mx-5 w-75'>
+                    <label for='pais'>Pais </label>
+                    <input required type='text' max-lenght='80' name='pais' placeholder='Pais de origen.' class='mx-5 w-75'>
+                    <label for='formato'>Formato </label>
+                    <input required type='text' max-lenght='80' name='formato' placeholder='Ej.: liguilla / eliminacion directa' class='mx-5 w-75'>
+                    <label for='fecha_fundacion'>Fecha de fundacion</label>
+                    <input required type='date' name='fecha_fundacion' max-lenght='2023-10-05' placeholder='Fecha de fundacion.' class='mx-5 my-1 w-75'>
+                </div>
+                <div class='d-flex flex-column w-50 align-items-center'>
+                    <label for='reglas'>Reglas de juego</label>
+                    <textarea required max-lenght='300' name='reglas' rows='8' placeholder='Definicion por penales, tiempo extra, cantidad de jugadores,etc.' class='mx-5 my-1 w-100'></textarea>
+                </div>
+            </div>
+            <div class='d-flex w-100'>
+                <div class='d-flex flex-column w-50 align-items-center'>
+                    <label for='temporada'>Temporada actual</label>
+                    <input required type='number' max='3000' name='temporada' placeholder='Ej.: 2022' class='mx-5 w-25'>
+                    <label for='cant_partidos'>Partidos por temporada</label>
+                    <input required type='number' max='300' name='cant_partidos' placeholder='Ej.: 52' class='mx-5 w-25'>
+                    <label for='division'>Division</label>
+                    <input required type='number' max='50' name='division' placeholder='Ej.:1 (primera division)' class='mx-5 w-25'>
+                </div>
+                <div class='d-flex flex-column w-50 align-items-center'>
+                    <label for='descripcion'>Breve descripcion/historia</label>
+                    <textarea required max-lenght='300' name='descripcion' rows='5' placeholder='Descripcion.' class='mx-5 my-1 w-100'></textarea>
+                </div>
+            </div>
+            <h6 class='border-bottom w-100 text-center'>Imagenes opcionales</h6>
+            <div class='d-flex w-100 justify-content-evenly'>
+                <div class='d-flex flex-column align-items-center'>
+                    <label for='imagen_logo'>Escudo</label>
+                    <input type='file' name='imagen_logo' class='mx-5 my-1'>
+                </div>
+                <div class='d-flex flex-column align-items-center'>
+                    <label for='imagen_pais'>Imagen del pais de origen</label>
+                    <input type='file' name='imagen_pais' class='mx-5 my-1'>
+                </div>
+            </div>
         <?php if ($errorForm) : ?>
-        <div class='alert alert-danger mt-3' role='alert'>
+        <div class='alert alert-danger mt-3 w-100 text-center' role='alert'>
             <?= $errorForm ?>
         </div> 
         <?php endif ?>
         <button type='submit' class='btn btn-outline-dark w-25 my-3'>Agregar liga</button>
     </form>
 </section>
+</main>

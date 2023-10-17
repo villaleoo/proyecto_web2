@@ -21,8 +21,12 @@ abstract class AdminController {
         $arrData =$this-> getData();
 
         if(isset($_POST) && !empty($_POST)){
-            if($this->_isEmptyValues($_POST, 2)){       /*MAS VALIDACIONES/VERIF AL POST EJEMPLO item CONSIDERADO REPETIDO (RECORRO items Y RETORNO SI ENCUENTRA UNO CON NOMBRE IGUAL AL QUE VIENE POR POST) */
-                $this-> showErrorForm($arrData); /*OTRA VALIDACION A AGREGAR ES SI ELIMINAN UN INPUT DESDE EL FRONT RECHAZAR EL FORMULARIO. HAY QUE RECORRER CUANTOS CAMPOS TIENE LIGAS Y CLUBES, DETECTAR LOS QUE PUEDEN SER NULOS Y VERIFICAR QUE TODOS LOS DEMAS ESTEN SETEADOS Y NO ESTEN VACIOS */
+            if($this->_isEmptyValues($_POST, 2) || $this->validationLenghtInput($_POST)){       /*MAS VALIDACIONES/VERIF AL POST EJEMPLO item CONSIDERADO REPETIDO (RECORRO items Y RETORNO SI ENCUENTRA UNO CON NOMBRE IGUAL AL QUE VIENE POR POST) */
+                if($idItemEdit){
+                    $this-> showErrorForm($arrData, $idItemEdit); /*OTRA VALIDACION A AGREGAR ES SI ELIMINAN UN INPUT DESDE EL FRONT RECHAZAR EL FORMULARIO. HAY QUE RECORRER CUANTOS CAMPOS TIENE LIGAS Y CLUBES, DETECTAR LOS QUE PUEDEN SER NULOS Y VERIFICAR QUE TODOS LOS DEMAS ESTEN SETEADOS Y NO ESTEN VACIOS */
+                }else{
+                    $this-> showErrorForm($arrData); /*OTRA VALIDACION A AGREGAR ES SI ELIMINAN UN INPUT DESDE EL FRONT RECHAZAR EL FORMULARIO. HAY QUE RECORRER CUANTOS CAMPOS TIENE LIGAS Y CLUBES, DETECTAR LOS QUE PUEDEN SER NULOS Y VERIFICAR QUE TODOS LOS DEMAS ESTEN SETEADOS Y NO ESTEN VACIOS */
+                }
                 return;
             }else{
                 if($idItemEdit){
@@ -79,11 +83,11 @@ abstract class AdminController {
     public function showError(){
         $this->view->renderError();
     }
-    abstract  function showCRUD($arrData, $idItemEdit= null);
+    abstract function showCRUD($arrData, $idItemEdit= null);
     abstract function createNewItem($postContent);
     abstract function getData();
-    abstract function showErrorForm($arrData);
-
+    abstract function showErrorForm($arrData ,$idItemEdit);
+    abstract function validationLenghtInput($arrForm);
 
 }
 

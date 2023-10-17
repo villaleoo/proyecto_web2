@@ -1,9 +1,8 @@
 <?php
-    include_once './app/controller/siteControllers/HomeController.php';
     include_once './app/controller/SessionController.php';
     include_once './app/controller/adminController/AdminTeamController.php';
     include_once './app/controller/adminController/AdminLeagueController.php';
-    $INIT_APP="home";   /*ESTA CONSTANTE DETERMINA A DONDE SE DIRECCIONA CUANDO LA URL SEA SOLO LA RAIZ */
+    $INIT_APP="ligas";   /*ESTA CONSTANTE DETERMINA A DONDE SE DIRECCIONA CUANDO LA URL SEA SOLO LA RAIZ */
     $action=$INIT_APP; /*ASIGNAMOS A ACTION EL VALOR DE LA CONSTANTE POR DEFECTO. */
     define('BASE_URL', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']).'/');   /*OBTIENE/DETERMINA LA RAIZ DEL SITIO*/
 
@@ -18,10 +17,6 @@
     
     
     switch ($params[0]) {
-        case "home":
-            $controllerHome=new HomeController();
-            $controllerHome->showHome();  /*invoca al controlador del home del sitio */
-            break;
         case "clubes":
             $controllerTeam= new TeamController();
             if(isset($params[1]) && !empty($params[1])){

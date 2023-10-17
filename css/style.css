@@ -22,7 +22,17 @@ li{
 .form-add-team{
     padding: 0 15% 0 15%;
 }
+.vh-70{
+    height: 77vh;
+}
 
+.card-personal{
+    height: 70vh;
+}
+.this-footer{
+    height: 20%;
+    color: gray;
+}
 @media only screen and (max-width: 1024px){
     body{
         padding: 0;

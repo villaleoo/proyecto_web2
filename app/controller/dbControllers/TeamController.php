@@ -18,7 +18,7 @@ class TeamController extends ItemController{
             $posInArray=$this->getIndexByItemId($id);
             $title = $arrItems[$posInArray]->nombre;
             
-            $nameOfLeague=$this->model->getNameOfLeague($arrItems[$posInArray]->id_liga);
+            $nameOfLeague=$this->getCategoryName($arrItems[$posInArray]->id_liga);
             
             $arrData= array($arrItems[$posInArray]->entidad =>$arrItems[$posInArray], "liga" => $nameOfLeague);
 
@@ -30,6 +30,12 @@ class TeamController extends ItemController{
             $this->showError();
             $this->layout->showFooter();
         }
+    }
+
+    public function getCategoryName($idCategory){
+        $nameOfLeague=$this->model->getNameOfLeague($idCategory);
+
+        return $nameOfLeague;
     }
   
 }

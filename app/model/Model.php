@@ -35,7 +35,7 @@ abstract class Model {
         $tables = $query->fetchAll();
 
         if(count($tables) == 0){
-            $sql = file_get_contents('./db/web-tpe.sql');
+            $sql = file_get_contents('./db/webtpe.sql');
             $this->db->exec($sql);
        
         }

@@ -34,8 +34,8 @@ class TeamsModel extends Model{
         $dataForm=$team[0];
         $idTeam=$team[1];
        
-        $varbinary_logo = pack("H*",bin2hex($dataForm["imagen_logo"]));
-        $varbinary_stadium = pack("H*",bin2hex($dataForm["imagen_estadio"]));
+        $varbinary_logo = base64_decode($dataForm["imagen_logo"]);
+        $varbinary_stadium = base64_decode($dataForm["imagen_estadio"]);
         $dateFundation=date("Y-m-d", strtotime($dataForm["fecha_fundacion"]));
 
 
@@ -49,8 +49,8 @@ class TeamsModel extends Model{
     public function addItem($team){
         $dataTeam= $team[0];
         $type=$team[1];
-        $varbinary_logo = pack("H*",bin2hex($dataTeam["imagen_logo"]));
-        $varbinary_stadium = pack("H*",bin2hex($dataTeam["imagen_estadio"]));
+        $varbinary_logo = base64_decode($dataTeam["imagen_logo"]);
+        $varbinary_stadium = base64_decode($dataTeam["imagen_estadio"]);
         $dateFundation=date("Y-m-d", strtotime($dataTeam["fecha_fundacion"]));
 
 

@@ -5,6 +5,7 @@ include_once './app/controller/dbControllers/LeagueController.php';
 
 class AdminTeamController extends AdminController{
     private $secondaryController;
+    private $quantityData=16;
 
     public function __construct(){
         parent::__construct(new TeamController(), "clubes");
@@ -12,9 +13,13 @@ class AdminTeamController extends AdminController{
     }
 
 
-    public function showErrorForm($arrData){
+    public function showErrorForm($arrData , $idItemEdit = null){
+        $teamEdit=null;
+        if($idItemEdit){
+            $teamEdit= $this->_getTeamById($idItemEdit);
+        }
         $this->layout->showHeader("Admin");
-        $this->view->renderTeamCRUD($arrData, "Campo/s requeridos incompleto/s.");
+        $this->view->renderTeamCRUD($arrData, "Campo/s requeridos incompleto/s.", $teamEdit);
         $this->layout->showFooter();
     }
 
@@ -55,6 +60,9 @@ class AdminTeamController extends AdminController{
         }
         $team= $this->controller->getItem($id);
         return $team;
+    }
+    public function validationLenghtInput($arrForm){
+        return count($arrForm) != $this->quantityData;
     }
 
     
