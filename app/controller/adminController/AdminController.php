@@ -7,16 +7,18 @@ abstract class AdminController {
     protected $view;
     protected $controller;
     protected $titleSection;/*ligas o clubes */
+    private $quantityData;/*inputs del formulario / campos en la tabla bbdd */
 
     /*los controladores admin se comunican con otros controladores (de ligas o equipos) para solicitarle que le den informacion de la bbdd */
     /*tiene su propia vista adminView y se le asocia el controlador layout para que todos los controladores admin (de ligas o equipos) ya tengan acceso a header y footer */
     /*titleSection y controller lo determinan las clases hijas */
-    public function __construct ( $controller ,$titleSection) {
+    public function __construct ($controller ,$titleSection, $quantityData) {
         AuthHelper::verifyAdminSession();
         $this->layout=new LayoutController();
         $this->view= new AdminView();
         $this->controller=$controller;
         $this->titleSection=$titleSection;
+        $this->quantityData = $quantityData;
 
     }
 
@@ -90,6 +92,34 @@ abstract class AdminController {
         $this->view->renderError();
     }
 
+    /*crea un nuevo item o categoria (segun que clase la invoque) con el contenido que le hace llegar adminCrud extraido de $_POST*/  
+    public function createNewItem($postContent){
+        $type;
+        if(substr($this->titleSection,-2) == 'es'){
+            $type= substr($this->titleSection,0,(strlen($this->titleSection ) - 2));
+        }elseif (substr($this->titleSection,-1) == 's') {
+            $type= substr($this->titleSection,0,(strlen($this->titleSection ) - 1));
+        }
+        $newItem= array(0 => $postContent, 1 => $type);
+        $this->controller->addItem($newItem);
+    }
+
+    /*valida que los datos venidos por $_POST sean todos los que tiene el form (si el form tiene 10 inputs, que esten los 10 seteados) */
+    public function validationLenghtInput($arrForm){
+        return count($arrForm) != $this->quantityData;
+    }
+
+    public function getItemById($id){
+        if($this->controller-> getIndexByItemId($id) < 0){
+            return null;
+        }
+
+        $item= $this->controller->getItem($id);
+        return $item;
+
+    }
+
+    
 
     /*FUNCIONES ABSTRACTAS QUE DEBEN IMPLEMENTAR LAS CLASES HIJAS ADMINISTRADORAS DE ITEMS Y CATEGORIAS */
 
@@ -97,13 +127,9 @@ abstract class AdminController {
     abstract function getData();
     /*renderiza el crud acorde a la data obtenida de getData y completa el formulario con los valores del item a editar (si lo hay) */
     abstract function showCRUD($arrData, $idItemEdit= null);
-    /*crea un nuevo item o categoria (segun que clase la invoque) con el contenido que le hace llegar adminCrud extraido de $_POST*/  
-    abstract function createNewItem($postContent);
     /*muestra error en el formulario (campos vacios o campos eliminados desde el front) es abstracta porque mandan a renderizar distintos templates(distintos forms item-categoria)*/
     abstract function showErrorForm($arrData ,$idItemEdit);
-    /*valida que los datos venidos por $_POST sean todos los que tiene el form (si el form tiene 10 inputs, que esten los 10 seteados) */
-    abstract function validationLenghtInput($arrForm);
-
+    
 }
 
 ?>
