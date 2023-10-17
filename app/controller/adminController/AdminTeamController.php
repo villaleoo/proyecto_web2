@@ -5,7 +5,7 @@ include_once './app/controller/dbControllers/LeagueController.php';
 
 class AdminTeamController extends AdminController{
     private $secondaryController;
-    private $quantityData=14;
+    private $quantityData=16;
 
     public function __construct(){
         parent::__construct(new TeamController(), "clubes");

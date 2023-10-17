@@ -13,6 +13,7 @@ class SessionController {
         $this->view=new SessionView();
     }
 
+    /*si el usuario ya esta logueado la linea 18 bloquea que pueda entrar a la url /login */
     public function showLogin(){
         AuthHelper::verifySessionExist();
         $this->view->renderFormLogin();

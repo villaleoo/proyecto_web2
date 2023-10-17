@@ -13,8 +13,6 @@ class UsersModel extends Model{
         return $user;
     }
 
-    public function getAllItems(){
-        return null;
-    }
+  
 }
 ?>

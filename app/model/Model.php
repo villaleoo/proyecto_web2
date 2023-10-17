@@ -4,12 +4,11 @@ abstract class Model {
     protected $db;
 
     public function __construct(){
-       
         $this->_createBBDD();
         $this->_deploy();
-        
     }
 
+    /*esta funcion hace que al invocarse algun modelo hijo de esta clase, cree la base de datos con nombre definido en la constante MYSQL_DB */
     private function _createBBDD(){
         try {
             $this->db = new PDO("mysql:host=".MYSQL_HOST, MYSQL_USER, MYSQL_PASS);
@@ -28,7 +27,7 @@ abstract class Model {
 
     }
 
-  
+    /*esta funcion toma la bbdd creada con _createBBDD y si NO contiene tablas le crea las tablas contenidas en el archivo .sql */
     private function _deploy(){
         $this->db = new PDO("mysql:host=".MYSQL_HOST .";dbname=".MYSQL_DB.";charset=utf8", MYSQL_USER, MYSQL_PASS);            
         $query = $this->db->query('SHOW TABLES');
@@ -41,7 +40,7 @@ abstract class Model {
         }
     }
 
-   abstract public function getAllItems();
+ 
 }
 
 
