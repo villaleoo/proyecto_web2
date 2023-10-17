@@ -22,13 +22,10 @@ abstract class AdminController {
 
         if(isset($_POST) && !empty($_POST)){
             if($this->_isEmptyValues($_POST, 2) || $this->validationLenghtInput($_POST)){       /*MAS VALIDACIONES/VERIF AL POST EJEMPLO item CONSIDERADO REPETIDO (RECORRO items Y RETORNO SI ENCUENTRA UNO CON NOMBRE IGUAL AL QUE VIENE POR POST) */
-                if($idItemEdit){
-                    $this-> showErrorForm($arrData, $idItemEdit); /*OTRA VALIDACION A AGREGAR ES SI ELIMINAN UN INPUT DESDE EL FRONT RECHAZAR EL FORMULARIO. HAY QUE RECORRER CUANTOS CAMPOS TIENE LIGAS Y CLUBES, DETECTAR LOS QUE PUEDEN SER NULOS Y VERIFICAR QUE TODOS LOS DEMAS ESTEN SETEADOS Y NO ESTEN VACIOS */
-                }else{
-                    $this-> showErrorForm($arrData); /*OTRA VALIDACION A AGREGAR ES SI ELIMINAN UN INPUT DESDE EL FRONT RECHAZAR EL FORMULARIO. HAY QUE RECORRER CUANTOS CAMPOS TIENE LIGAS Y CLUBES, DETECTAR LOS QUE PUEDEN SER NULOS Y VERIFICAR QUE TODOS LOS DEMAS ESTEN SETEADOS Y NO ESTEN VACIOS */
-                }
+                $this-> showErrorForm($arrData, $idItemEdit); /*OTRA VALIDACION A AGREGAR ES SI ELIMINAN UN INPUT DESDE EL FRONT RECHAZAR EL FORMULARIO. HAY QUE RECORRER CUANTOS CAMPOS TIENE LIGAS Y CLUBES, DETECTAR LOS QUE PUEDEN SER NULOS Y VERIFICAR QUE TODOS LOS DEMAS ESTEN SETEADOS Y NO ESTEN VACIOS */
                 return;
             }else{
+                
                 if($idItemEdit){
                     $item= array(0 => $_POST, 1 =>intval($idItemEdit));
                     $this->controller->updateItem($item);
@@ -83,6 +80,8 @@ abstract class AdminController {
     public function showError(){
         $this->view->renderError();
     }
+
+
     abstract function showCRUD($arrData, $idItemEdit= null);
     abstract function createNewItem($postContent);
     abstract function getData();

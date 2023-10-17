@@ -3,7 +3,7 @@
             <h5 class='text-center bg-warning' >Para agregar un club es necesario contar con al menos 1 liga.</h5>
         <?php else: ?>  
         <h5 class='text-center bg-info' >Agregar nuevo club </h5>
-        <form action='admin/clubes' method='POST'  class='mt-4 vh-75 px-5 d-flex flex-column border'>
+        <form action='admin/clubes' method='POST'  class='mt-4 vh-75 px-5 d-flex flex-column border' enctype="multipart/form-data" >
             <div class='d-flex w-100'>
                 <div class='w-50 d-flex flex-column  align-items-center' >
                     <h6 class='border-bottom w-100 text-center' >Datos del club</h6>

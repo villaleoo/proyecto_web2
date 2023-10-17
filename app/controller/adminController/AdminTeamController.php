@@ -5,7 +5,7 @@ include_once './app/controller/dbControllers/LeagueController.php';
 
 class AdminTeamController extends AdminController{
     private $secondaryController;
-    private $quantityData=16;
+    private $quantityData=14;
 
     public function __construct(){
         parent::__construct(new TeamController(), "clubes");
@@ -53,7 +53,6 @@ class AdminTeamController extends AdminController{
         }
     }
 
-
     private function _getTeamById($id){
         if($this->controller-> getIndexByItemId($id) < 0){
             return null;
@@ -61,9 +60,11 @@ class AdminTeamController extends AdminController{
         $team= $this->controller->getItem($id);
         return $team;
     }
+
     public function validationLenghtInput($arrForm){
         return count($arrForm) != $this->quantityData;
     }
+
 
     
 
