@@ -5,13 +5,25 @@ include_once './app/controller/dbControllers/LeagueController.php';
 
 class AdminTeamController extends AdminController{
     private $secondaryController;
-    private $quantityData=16;
-
+    
     public function __construct(){
-        parent::__construct(new TeamController(), "clubes");
+        parent::__construct(new TeamController(), "clubes", 16);
         $this->secondaryController= new LeagueController();
     }
 
+    public function showCRUD($arrData, $idItemEdit= null){
+        if($idItemEdit){
+            $teamEdit= $this->getItemById($idItemEdit);
+            if($teamEdit){
+                $this->view->renderTeamCRUD($arrData,null,$teamEdit); 
+            }else{
+                $this->showError();
+            }
+            
+        }else{
+            $this->view->renderTeamCRUD($arrData);
+        }
+    }
 
     public function showErrorForm($arrData , $idItemEdit = null){
         $teamEdit=null;
@@ -23,13 +35,6 @@ class AdminTeamController extends AdminController{
         $this->layout->showFooter();
     }
 
-
-    public function createNewItem($postContent){
-        $newTeam= array(0 => $postContent, 1 => 'club');
-        $this->controller->addItem($newTeam);
-    }
-
-
     public function getData(){
         $arrData;
         $arrTeams=$this->controller->getArrItems();
@@ -39,31 +44,9 @@ class AdminTeamController extends AdminController{
         return $arrData;
     }
 
-    public function showCRUD($arrData, $idItemEdit= null){
-        if($idItemEdit){
-            $teamEdit= $this->_getTeamById($idItemEdit);
-            if($teamEdit){
-                $this->view->renderTeamCRUD($arrData,null,$teamEdit); /*agregar param team */
-            }else{
-                $this->showError();
-            }
-            
-        }else{
-            $this->view->renderTeamCRUD($arrData);
-        }
-    }
 
-    private function _getTeamById($id){
-        if($this->controller-> getIndexByItemId($id) < 0){
-            return null;
-        }
-        $team= $this->controller->getItem($id);
-        return $team;
-    }
 
-    public function validationLenghtInput($arrForm){
-        return count($arrForm) != $this->quantityData;
-    }
+  
 
 
     
