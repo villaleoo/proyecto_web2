@@ -1,0 +1,12 @@
+<?php if(empty($arrData)):?>
+    <h5 class='text-center'>No hay ligas cargadas</h5>
+<?php else: ?>
+    <section class='w-100 d-flex align-items-center flex-column'>
+        <h3 class='my-3'>🏆 Ligas 🏆</h3>
+        <ul class='w-75 h-100 d-flex flex-column align-items-center px-5'>
+        <?php foreach($arrData as $league): ?>
+            <li class='my-2 w-75 d-flex  justify-content-center'><h4><a href='<?= BASE_URL ?>ligas/<?=$league->id?>'><?= strtoupper($league->nombre)?></h4></a></li>
+        <?php endforeach ?>
+        </ul>
+    </section>
+<?php endif ?>

@@ -1,0 +1,29 @@
+<a class='my-1 d-block' href='ligas'>↩ <span class='text-decoration-underline'>Volver</span></a>
+<h6 class='my-2'>➡ Liga</h6>
+<section class='px-5 d-flex flex-column'>
+   <div class='d-flex flex-column px-5' >
+      <div class='d-flex flex-column justify-content-center align-items-center' >
+            <h1><?= ucwords($arrData["liga"]->nombre)?> <span class='fs-6 fst-italic d-block text-center'>(<?= ucwords($arrData["liga"]->pais) ?>)</span></h1>
+            <h6>Division: <span class="fw-bold"><?=$arrData["liga"]->division?></span>.</h6>
+            <p><span class="fw-bold">Fundacion:</span> <?=$arrData["liga"]->fecha_fundacion?>.</p>
+            <p><?=ucfirst($arrData["liga"]->descripcion)?></p>
+      </div>
+      <p>Cantidad de partidos: <span class="fw-bold"><?=$arrData["liga"]->cant_partidos?></span>.</p>
+      <p>Formato: <?=ucfirst($arrData["liga"]->formato)?>.</p>
+      <p>Reglas: <?=strtolower($arrData["liga"]->reglas)?></p>
+   </div>
+   <?php if(count($arrData["clubes"])>0): ?>
+      <h6 class='px-5'>Clubes que la componen: </h6>
+      <?php $concat=""?>
+         <p class='px-5'>
+         <?php for ($i=0; $i < count($arrData["clubes"]); $i++): ?>
+               <?php if($i==count($arrData["clubes"])-1): ?> 
+                  <?php $contact=$concat.ucwords($arrData["clubes"][$i]->nombre).'.'?>
+               <?php else: ?>
+                  <?php $contact=$concat.ucwords($arrData["clubes"][$i]->nombre).','?>
+               <?php endif ?>
+               <?=$contact?>
+         <?php endfor ?>
+         </p>
+   <?php endif ?>
+</section>

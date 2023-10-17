@@ -1,0 +1,68 @@
+
+<section class='d-flex flex-column w-100 px-5' >
+    <h5 class='text-center bg-warning'>Editando "<?=ucwords($teamEdit->nombre)?>"</h5>
+    <form action='admin/clubes/<?=$teamEdit->id?>' method='POST' class='mt-4 px-5 d-flex flex-column justify-content-center align-items-center border'>
+        <div class='d-flex w-100'>
+            <div class='w-75 d-flex flex-column align-items-center' >
+                <h6 class='mt-3 border-bottom w-100 text-center'>Datos del club</h6>
+                <label for='nombre'>Nombre </label>
+                <input required type='text' max-lenght='100' name='nombre' placeholder='Nombre.' value="<?=$teamEdit->nombre?>" class='mx-5 w-75'>
+                <label for='apodo'>Apodo </label> 
+                <input required type='text' name='apodo' max-lenght='100' placeholder='Apodo.' value="<?=$teamEdit->apodo?>" class='mx-5 my-1 w-75'>
+                <label for='ciudad'>Ciudad</label>
+                <input required type='text' max-lenght='100' name='ciudad' placeholder='Ciudad.' value="<?=$teamEdit->ciudad?>" class='mx-5 my-1 w-75'>
+                <label for='fecha_fundacion' >Fecha fundacion</label>
+                <input required type='date' name='fecha_fundacion' max-lenght='2023-10-05' placeholder='Fecha de fundacion.' value="<?=$teamEdit->fecha_fundacion?>" class='mx-5 my-1 w-75'>
+                <label from='id_liga' >Liga perteneciente</label>
+                <select class='mx-5 my-1 w-75' name='id_liga'>
+                <?php for ($i=0; $i < count($arrData["ligas"]) ; $i++): ?> 
+                    <?php if($arrData["ligas"][$i]->id == $teamEdit->id_liga): ?>
+                        <option selected value='<?=$arrData["ligas"][$i]->id?>'><?=$arrData["ligas"][$i]->nombre?></option>
+                    <?php else: ?>
+                    <option value='<?=$arrData["ligas"][$i]->id?>'><?=$arrData["ligas"][$i]->nombre?></option>
+                    <?php endif ?>
+                <?php endfor ?>
+                </select>
+                <label for='nombre_estadio'>Nombre estadio</label>
+                <input required type='text' max-lenght='100' name='nombre_estadio' placeholder='Nombre del estadio.' value="<?=$teamEdit->nombre_estadio?>" class='mx-5 my-1 w-75'>
+                <label for='capacidad_estadio'>Capacidad</label>
+                <input required type='number' name='capacidad_estadio' max='1000000' placeholder='Capacidad total del estadio.'value="<?=$teamEdit->capacidad_estadio?>" class='mx-5 my-1 w-50'>
+                <label for='descripcion_historia'>Descripcion/historia</label>
+                <textarea required max-lenght='300' name='descripcion_historia' rows='5' placeholder='Breve historia del club/descripcion.' class='mx-5 my-1 w-75'><?=$teamEdit->descripcion_historia?></textarea>
+            </div>
+            <div class='w-75 d-flex flex-column align-items-center'>
+                <h6 class='mt-3 border-bottom w-100 text-center'>Datos estadisticos</h6>
+                <label for='temporada_analisis'>Año de temporada analizada </label>
+                <input required type='number' name='temporada_analisis' min='1900' max='5000' placeholder='Ej.:2022' value="<?=$teamEdit->temporada_analisis?>" class='mx-5 my-1 w-25'>
+                <label for='cant_partidos_jugados'>Cant. partidos jugados en temporada</label>
+                <input required type='number' name='cant_partidos_jugados' min='10' max='200' placeholder='Ej.: 38' value="<?=$teamEdit->cant_partidos_jugados?>" class='mx-5 my-1 w-25'>
+                <label for='goles_en_liga'>Cant. goles en liga </label>
+                <input required type='number' name='goles_en_liga' min='0' max='500' placeholder='Ej.: 52' value="<?=$teamEdit->goles_en_liga?>" class='mx-5 my-1 w-25'>
+                <label for='goles_en_copa'>Cant. goles en copas </label>
+                <input required type='number' name='goles_en_copa' min='0' max='500' placeholder='Ej.: 52' value="<?=$teamEdit->goles_en_copa?>" class='mx-5 my-1 w-25'>
+                <label for='promedio_edad_equipo'>Promedio de edad del equipo</label>
+                <input required type='number' name='promedio_edad_equipo' min='0' max='500' placeholder='Ej.: 32' value="<?=$teamEdit->promedio_edad_equipo?>" class='mx-5 my-1 w-25'>
+                <label for='cantidad_jugadores'>Cant. jugadores en temporada</label>
+                <input required type='number' name='cantidad_jugadores' min='0' max='500' placeholder='Ej.: 32'  value="<?=$teamEdit->cantidad_jugadores?>" class='mx-5 my-1 w-25'>
+                <h6 class='mt-3 border-bottom w-100 text-center'>Imagenes opcionales</h6>
+                <label for='imagen_logo'>Escudo del club</label>
+                <input type='file' name='imagen_logo' value="<?=$teamEdit->imagen_logo?>" class='mx-5 my-1'>
+                <label for='imagen_estadio'>Imagen de estadio</label>
+                <input type='file' name='imagen_estadio' value="<?=$teamEdit->imagen_estadio?>" class='mx-5 my-1'>
+            </div>
+        </div>
+        <div class='d-flex flex-column justify-content-center align-items-center w-100'>
+            <?php if ($errorForm) : ?>
+            <div class='alert alert-danger mt-3' role='alert'>
+                <?= $errorForm ?>
+            </div> 
+            <?php endif ?>
+            <div class='w-100 d-flex justify-content-evenly align-items-center' >
+                <button type='submit' class='btn btn-outline-dark w-25 my-3'>Guardar cambios</button>
+                <a href='<?= BASE_URL?>admin/clubes' class='btn btn-outline-dark w-25' >Cancelar edicion</a>
+            </div>
+        </div>
+       
+    </form>
+</section>
+</main>

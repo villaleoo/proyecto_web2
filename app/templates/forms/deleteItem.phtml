@@ -1,0 +1,10 @@
+
+<section class='d-flex flex-column pt-5 align-items-center vh-70 w-100'>
+    <h4 class='mb-5'>¿Seguro desea eliminar "<?=ucwords($item->nombre)?>"?</h4>
+    <div class='d-flex w-75 justify-content-evenly align-items-center' >
+        <a class='btn btn-outline-dark' href='eliminar/<?= $item->entidad?>/<?= $item->id?>/true'>Eliminar</a>
+        <a class='btn btn-outline-dark' href='admin/<?=$category?>'>Cancelar</a>
+    </div>
+</section>
+    
+

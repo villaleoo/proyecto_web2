@@ -1,7 +1,8 @@
 <?php
-    include_once './app/controller/siteControllers/HomeController.php';
     include_once './app/controller/SessionController.php';
-    $INIT_APP="home";   /*ESTA CONSTANTE DETERMINA A DONDE SE DIRECCIONA CUANDO LA URL SEA SOLO LA RAIZ */
+    include_once './app/controller/adminController/AdminTeamController.php';
+    include_once './app/controller/adminController/AdminLeagueController.php';
+    $INIT_APP="ligas";   /*ESTA CONSTANTE DETERMINA A DONDE SE DIRECCIONA CUANDO LA URL SEA SOLO LA RAIZ */
     $action=$INIT_APP; /*ASIGNAMOS A ACTION EL VALOR DE LA CONSTANTE POR DEFECTO. */
     define('BASE_URL', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']).'/');   /*OBTIENE/DETERMINA LA RAIZ DEL SITIO*/
 
@@ -16,16 +17,20 @@
     
     
     switch ($params[0]) {
-        case "home":
-            $controllerHome=new HomeController();
-            $controllerHome->showHome();  /*invoca al controlador del home del sitio */
-            break;
         case "clubes":
             $controllerTeam= new TeamController();
             if(isset($params[1]) && !empty($params[1])){
-                $controllerTeam->showTeam($params[1]);
+                $controllerTeam->showItemDetail($params[1]);
             }else{
-                $controllerTeam->showTeamsList();
+                $controllerTeam->showItemList($params[0]);
+            }
+            break;
+        case "ligas":
+            $controllerLeague= new LeagueController();
+            if(isset($params[1]) && !empty($params[1])){
+                $controllerLeague->showItemDetail($params[1]);
+            }else{
+                $controllerLeague->showItemList($params[0]);
             }
             break;
         case "login":
@@ -37,11 +42,59 @@
             $controllerSession->auth();
             break;
         case 'logout':
-            $controller = new SessionController();
-            $controller->logout();
+            $controllerSession = new SessionController();
+            $controllerSession->logout();
+            break;
+        case "admin":
+            $edit= isset($params[2]) && !empty($params[2]);
+            switch ($params[1]) {
+                case 'ligas':
+                    $controllerAdmin= new AdminLeagueController();
+                    if($edit){
+                        $controllerAdmin->adminCRUD($params[2]);
+                    }else{
+                        $controllerAdmin->adminCRUD();
+                    }
+                    break;
+                case 'clubes':
+                    $controllerAdmin= new AdminTeamController();
+                    if($edit){
+                        $controllerAdmin->adminCRUD($params[2]);
+                    }else{
+                        $controllerAdmin->adminCRUD();
+                    }
+                    break;
+                default:
+                    header('Location: '.BASE_URL);
+                    break;
+            }
+            break;
+        case "eliminar":
+            $qParams= count($params);
+            switch ($params[1]) {
+                case 'liga':
+                    $controllerAdmin= new AdminLeagueController();
+                    if($qParams == 3){
+                        $controllerAdmin->showDeleteItem($params[2]);
+                    }elseif ($qParams == 4) {
+                        $controllerAdmin->removeItem($params[2]);
+                    }
+                    break;
+                case 'club':
+                    $controllerAdmin= new AdminTeamController();
+                    if($qParams == 3){
+                        $controllerAdmin->showDeleteItem($params[2]);
+                    }elseif ($qParams == 4) {
+                        $controllerAdmin->removeItem($params[2]);
+                    }
+                    break;
+                default:
+                    header('Location: '.BASE_URL);
+                    break;
+            }
             break;
         default:
-            echo "defaul";
+            header('Location: '.BASE_URL);
             break;
     }
 

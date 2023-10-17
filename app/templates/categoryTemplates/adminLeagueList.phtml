@@ -1,0 +1,25 @@
+<main class="d-flex flex-column" >
+    <section class='border-bottom mb-4 vh-70' >    
+        <div class='d-flex flex-column align-items-center justify-content-center w-100  h-100 container-list' >
+            <h5>Lista de <?=$arrData["categoria"]?></h5>
+            <ul class='h-100 w-75 px-0 d-flex flex-column border overflow-auto order-info-content' data-bs-spy="scroll">
+                <?php if(empty($arrData["ligas"])): ?>
+                    <p class='text-center mt-5' >¡No hay elementos cargados!</p>
+                <?php else: ?>
+                    <?php $count=1?>
+                    <?php foreach($arrData["ligas"] as $league ): ?> 
+                        <li class='w-100 d-flex justify-content-between align-items-center border-bottom'>
+                            <div class='mx-3' >
+                                <p><span class='fw-bolder'><?= $count ?></span> - <?= ucwords($league->nombre) ?></p>
+                            </div>
+                            <div>
+                                <a href='<?=BASE_URL?>admin/ligas/<?= $league->id?>' class='btn btn-outline-dark' >Editar</a>
+                                <a href='<?=BASE_URL?>eliminar/<?= $league->entidad?>/<?= $league->id ?>' class='btn btn-outline-dark'>Eliminar</a>
+                            </div>
+                        </li>
+                        <?php $count= $count+1 ?>
+                    <?php endforeach ?>
+                <?php endif ?>
+            </ul>   
+        </div>
+    </section>

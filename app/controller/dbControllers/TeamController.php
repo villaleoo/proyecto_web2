@@ -1,65 +1,42 @@
 <?php
 include_once './app/model/TeamsModel.php';
 include_once './app/view/TeamView.php';
-include_once './app/controller/siteControllers/LayoutController.php';
+require_once './app/controller/dbControllers/ItemController.php';
 
-class TeamController{
-    private $model;
-    private $view;
-    private $layout;
-    
+class TeamController extends ItemController{
+   
     public function __construct(){
-        $this->model= new TeamsModel();
-        $this->view=new TeamView();
-        $this->layout = new LayoutController();
+        parent::__construct(new TeamView(),new TeamsModel());
         
     }
 
-    public function getTeams(){
-        $arrTeams= $this->model->getTeams();
-        return $arrTeams;
-    }
-
-    public function showTeamsList(){
-       
-        $this->layout->showHeader("Clubes");
-        $this->view->renderTeamsList($this->getTeams());
-        $this->layout->showFooter();
-    }
-
-    private function getIndexTeam($teamId){
-        $pos=0;
-
-        while ($pos < count($this->getTeams()) && $this->getTeams()[$pos]->id_club != intval($teamId) ) {
-            $pos++;
-        }
-
-        if($pos < count($this->getTeams()) ){
-            return $pos;
-        }
-        return -1;
-    }
-
-    
-
-    public function showTeam($teamId){
-        $arrTeams= $this->getTeams();
+    public function showItemDetail($id){                                         
+        $arrItems= $this->getArrItems();
        
 
-        if($this->getIndexTeam($teamId) >= 0){
-            $posInArrayTeam=$this->getIndexTeam($teamId);
-            $title = strtoupper(substr($arrTeams[$posInArrayTeam]->nombre, 0, 1)) . substr($arrTeams[$posInArrayTeam]->nombre, 1); 
-            $leagueOfTeam=$this->model->getLeagueNameOfTeam($arrTeams[$posInArrayTeam]->id_liga);
+        if($this->getIndexByItemId($id) >= 0){
+            $posInArray=$this->getIndexByItemId($id);
+            $title = $arrItems[$posInArray]->nombre;
             
-            $dataTeam= array("equipo"=>$arrTeams[$posInArrayTeam], "liga" => $leagueOfTeam);
+            $nameOfLeague=$this->getCategoryName($arrItems[$posInArray]->id_liga);
+            
+            $arrData= array($arrItems[$posInArray]->entidad =>$arrItems[$posInArray], "liga" => $nameOfLeague);
 
             $this->layout->showHeader($title);
-            $this->view->renderTeam($dataTeam);
+            $this->view->renderItemDetail($arrData);
             $this->layout->showFooter();
         }else{
-            echo "404 ERROR CLUB INEXISTENTE";
+            $this->layout->showHeader("Error");
+            $this->showError();
+            $this->layout->showFooter();
         }
     }
-    
+
+    public function getCategoryName($idCategory){
+        $nameOfLeague=$this->model->getNameOfLeague($idCategory);
+
+        return $nameOfLeague;
+    }
+  
 }
 ?>

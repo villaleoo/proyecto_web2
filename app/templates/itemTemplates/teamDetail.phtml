@@ -1,0 +1,23 @@
+<a href='clubes' class='my-1 d-block' >↩ <span class='text-decoration-underline'>Volver</span></a>
+<h6 class='my-3'>➡ <?= strtoupper($arrData["liga"]->nombre) ?> / <?= ucwords($arrData["club"]->nombre) ?> </h6>
+<section class='px-5 mt-4 d-flex flex-column'>
+    <div class='d-flex flex-column px-5' >
+        <div class='d-flex flex-column justify-content-center align-items-center' >
+            <h1><?= ucwords($arrData["club"]->nombre)?> <span class='fs-6 fst-italic d-block text-center'>(<?= ucwords($arrData["liga"]->nombre) ?>)</span></h1>
+            <h6>"<?=ucwords($arrData["club"]->apodo)?>"</h6>
+            <p><span class="fw-bold">Fundacion:</span> <?=$arrData["club"]->fecha_fundacion?></p>
+            <p><?=ucfirst($arrData["club"]->descripcion_historia)?></p>
+        </div>
+        <p>Estadio: <span class='fw-bold'><?= ucwords($arrData["club"]->nombre_estadio)?></span>. (Capacidad: <?= $arrData["club"]->capacidad_estadio?> espectadores).</p>
+        <div>
+            <ul>
+                <li>TEMPORADA <span class='fw-bold'><?=$arrData["club"]->temporada_analisis?></span>.</li>
+                <li>Cantidad de partidos jugados: <span class='fw-bold'><?=$arrData["club"]->cant_partidos_jugados?></span>.</li>
+                <li>Goles liga: <span class='fw-bold'><?=$arrData["club"]->goles_en_liga?></span>.</li>
+                <li>Goles copa: <span class='fw-bold'><?=$arrData["club"]->goles_en_copa?></span>.</li>
+                <li>Cantidad jugadores profesionales: <span class='fw-bold'><?=$arrData["club"]->cantidad_jugadores?></span>.</li>
+                <li>Promedio de edad: <span class='fw-bold'><?=$arrData["club"]->promedio_edad_equipo?></span>.</li>
+            </ul>
+        </div>
+    </div>
+</section>

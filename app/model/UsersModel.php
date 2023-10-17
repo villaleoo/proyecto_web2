@@ -2,7 +2,7 @@
 require_once './app/model/Model.php';
 
 class UsersModel extends Model{
-
+   
 
     public function getUserByUserName($userName){
 
@@ -11,6 +11,10 @@ class UsersModel extends Model{
         $user = $request->fetch(PDO::FETCH_OBJ);
 
         return $user;
+    }
+
+    public function getAllItems(){
+        return null;
     }
 }
 ?>
