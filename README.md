@@ -1,8 +1,7 @@
 # TRABAJO PRACTICO ESPECIAL WEB 2 - SEGUNDA ENTREGA 17/10
 
 ## Integrantes:
-- Leopoldo Villa. villaleoo@hotmail.com .
-- Gabriel Andres Garcia. gabrielandgarcia.995@gmail.com .
+- Leopoldo Villa. villaleoo@hotmail.com 
 
 ## Tematica:
 Se refactorizo la idea original de la primer entrega para hacer algo mas simple y sobre todo mas util. Apuntaremos realizar un sitio web orientado al analisis de estadisticas e informacion de clubes de futbol pertenecientes a determinadas ligas. Al ingresar a una determinada liga mostrara informacion de la liga en una determinada temporada y los clubes que la componen. Al ingresar a un club, detallara informacion del club en particular.
